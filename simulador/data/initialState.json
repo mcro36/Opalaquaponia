@@ -1,0 +1,38 @@
+{
+  "phase": "pilot",
+  "biomass": {
+    "t1": 50,
+    "t2": 50,
+    "t3": 50,
+    "t4": 50,
+    "t5": 50,
+    "t6": 50
+  },
+  "capexItems": [
+    { "id": "p1", "category": "Infraestrutura", "name": "6 Tanques 5.000L", "cost": 15000, "status": "Planejado" },
+    { "id": "p2", "category": "Hidráulica", "name": "Tubulações iniciais", "cost": 5000, "status": "Planejado" },
+    { "id": "p3", "category": "Aeração", "name": "Sopradores Piloto (2x 1CV)", "cost": 5000, "status": "Planejado" }
+  ],
+  "opexItems": [
+    { "id": "o1", "category": "Ração", "name": "Ração (Premium)", "monthlyCost": 945 },
+    { "id": "o2", "category": "Mão de Obra", "name": "Tratador em Domicílio", "monthlyCost": 1000 },
+    { "id": "o3", "category": "Energia", "name": "Energia Elétrica", "monthlyCost": 400 }
+  ],
+  "parameters": {
+    "scenario": "realista",
+    "targetDensity": 35,
+    "fca": 1.2,
+    "pricePerKg": 50,
+    "mortalityByPhase": [
+      { "phase": "transporte", "rate": 5 },
+      { "phase": "alevinagem", "rate": 10 },
+      { "phase": "recria", "rate": 4 },
+      { "phase": "engorda", "rate": 2 }
+    ],
+    "climateControlEnabled": false,
+    "ownFeedEnabled": false,
+    "linhagem": "gift",
+    "reversaoSexual": true,
+    "targetWeight": 800
+  }
+}

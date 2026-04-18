@@ -1,0 +1,1 @@
+﻿app/riscos/page.tsx(186,84): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
