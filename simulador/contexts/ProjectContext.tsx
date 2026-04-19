@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, useEffect, ReactNode, useState } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, ReactNode, useState, useCallback } from 'react';
 import initialData from '../data/initialState.json';
 import { loadFullState, updateProject, upsertCapexItem, deleteCapexItem, upsertOpexItem, deleteOpexItem } from '../lib/supabaseActions';
 import { DEFAULT_PROJECT_ID } from '../lib/supabase';
@@ -63,6 +63,7 @@ function appReducer(state: AppState, action: Action): AppState {
 const ProjectContext = createContext<{
   state: AppState;
   dispatch: React.Dispatch<Action>;
+  syncDispatch: (action: Action) => void;
   isLoading: boolean;
   dataSource: 'supabase' | 'localStorage' | 'default';
 } | undefined>(undefined);
@@ -108,36 +109,62 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     init();
   }, []);
 
-  // 2. Persist: Save changes to both localStorage (instant) and Supabase (async)
+  // 2. Persist project-level params to both localStorage and Supabase
   useEffect(() => {
     if (!isInitialized) return;
-
-    // Always save to localStorage as instant fallback
     localStorage.setItem('opala_simulador_state', JSON.stringify(state));
-
-    // Async sync to Supabase (fire and forget)
-    const syncToSupabase = async () => {
-      try {
-        await updateProject(DEFAULT_PROJECT_ID, {
-          phase: state.phase,
-          fca_base: state.parameters.fca,
-          price_per_kg: state.parameters.pricePerKg,
-          climate_control_enabled: state.parameters.climateControlEnabled,
-          own_feed_enabled: state.parameters.ownFeedEnabled,
-          current_scenario: state.parameters.scenario,
-          linhagem: state.parameters.linhagem,
-          target_weight_g: state.parameters.targetWeight,
-          target_density_kg_m3: state.parameters.targetDensity,
-        });
-      } catch (err) {
-        console.warn('Supabase sync failed (offline mode active):', err);
-      }
-    };
-    syncToSupabase();
   }, [state, isInitialized]);
 
+  // 3. syncDispatch: Dispatches locally AND syncs the specific action to Supabase
+  const syncDispatch = useCallback((action: Action) => {
+    // First, apply locally (optimistic update)
+    dispatch(action);
+
+    // Then, async sync to Supabase based on action type
+    const sync = async () => {
+      try {
+        switch (action.type) {
+          case 'ADD_CAPEX':
+          case 'UPDATE_CAPEX':
+            await upsertCapexItem(DEFAULT_PROJECT_ID, action.payload);
+            break;
+          case 'REMOVE_CAPEX':
+            await deleteCapexItem(action.payload);
+            break;
+          case 'ADD_OPEX':
+          case 'UPDATE_OPEX':
+            await upsertOpexItem(DEFAULT_PROJECT_ID, action.payload);
+            break;
+          case 'REMOVE_OPEX':
+            await deleteOpexItem(action.payload);
+            break;
+          case 'UPDATE_PARAM':
+            // Map our param keys to Supabase column names
+            const paramMap: Record<string, string> = {
+              scenario: 'current_scenario',
+              fca: 'fca_base',
+              pricePerKg: 'price_per_kg',
+              climateControlEnabled: 'climate_control_enabled',
+              ownFeedEnabled: 'own_feed_enabled',
+              linhagem: 'linhagem',
+              targetWeight: 'target_weight_g',
+              targetDensity: 'target_density_kg_m3',
+            };
+            const colName = paramMap[action.payload.key];
+            if (colName) {
+              await updateProject(DEFAULT_PROJECT_ID, { [colName]: action.payload.value });
+            }
+            break;
+        }
+      } catch (err) {
+        console.warn('Supabase sync error (data saved locally):', err);
+      }
+    };
+    sync();
+  }, []);
+
   return (
-    <ProjectContext.Provider value={{ state, dispatch, isLoading, dataSource }}>
+    <ProjectContext.Provider value={{ state, dispatch, syncDispatch, isLoading, dataSource }}>
       {children}
     </ProjectContext.Provider>
   );

@@ -5,7 +5,7 @@ import { Wind, AlertTriangle, CheckCircle2, Activity, Timer } from 'lucide-react
 import { useEffect, useState } from "react";
 
 export default function AeracaoPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function AeracaoPage() {
   if (densityKgM3 > 30) survivalMinutes = 20;
 
   const handleBiomassChange = (tankId: string, value: string) => {
-    dispatch({
+    syncDispatch({
       type: 'UPDATE_BIOMASS',
       payload: { tankId, value: Math.max(0, Number(value)) }
     });

@@ -9,7 +9,7 @@ import { Wallet, LineChart, Activity, DollarSign, TrendingUp, AlertTriangle, Fis
 import { calcDiasAteDespesca, calcAlevinosNecessarios, calcLucroLiquidoMensal, calcFCAPonderado } from "../lib/calculationEngine";
 
 export default function Dashboard() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
 
   // Ensure arrays exist for calculation extraction
   const capexItems = state.capexItems || [];
@@ -100,7 +100,7 @@ export default function Dashboard() {
             <span className="text-sm font-semibold text-gray-400">CENÁRIO:</span>
             <select 
               value={scenario}
-              onChange={(e) => dispatch({ type: 'UPDATE_PARAM', payload: { key: 'scenario', value: e.target.value }})}
+              onChange={(e) => syncDispatch({ type: 'UPDATE_PARAM', payload: { key: 'scenario', value: e.target.value }})}
               className="bg-transparent text-white font-bold outline-none cursor-pointer"
             >
               <option value="otimista" className="bg-[#0a0f1c]">Otimista (FCA 1.0)</option>

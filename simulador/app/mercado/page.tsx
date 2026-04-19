@@ -5,10 +5,10 @@ import { CloudRain, Store, Scale, ThermometerSnowflake, FileCheck } from "lucide
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
 
 export default function MercadoPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
 
   const handlePriceUpdate = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch({ 
+    syncDispatch({ 
       type: 'UPDATE_PARAM', 
       payload: { key: 'pricePerKg', value: Number(e.target.value) } 
     });

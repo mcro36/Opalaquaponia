@@ -5,21 +5,18 @@ import EditableTable from "../../../components/EditableTable";
 import { Activity, Download, Calendar } from "lucide-react";
 
 export default function OpexPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
 
   const handleUpdate = (item: any) => {
-    // If user edited yearly, we shouldn't overwrite unless they specifically edited it. But since monthly is the source of truth let's revert it or ignore yearly edits. 
-    // Wait, the EditableTable edits the exact key. If they edit monthlyCost, it reflects directly. 
-    // In our model we only save monthlyCost.
-    dispatch({ type: 'UPDATE_OPEX', payload: item });
+    syncDispatch({ type: 'UPDATE_OPEX', payload: item });
   };
 
   const handleRemove = (id: string) => {
-    dispatch({ type: 'REMOVE_OPEX', payload: id });
+    syncDispatch({ type: 'REMOVE_OPEX', payload: id });
   };
 
   const handleAdd = (item: any) => {
-    dispatch({ type: 'ADD_OPEX', payload: item });
+    syncDispatch({ type: 'ADD_OPEX', payload: item });
   };
 
   const exportJSON = () => {

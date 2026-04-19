@@ -5,22 +5,23 @@ import { useProject } from "../../../contexts/ProjectContext";
 import { Cpu, Plus, Trash2, Save, X } from "lucide-react";
 
 export default function AutomacaoPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
   const [isAdding, setIsAdding] = useState(false);
   const [newItem, setNewItem] = useState({ name: '', cost: 0 });
 
   const sensores = state.capexItems.filter(item => item.category === 'Automação' || item.name.toLowerCase().includes('sensor'));
 
   const handleDelete = (id: string) => {
-    dispatch({ type: 'REMOVE_CAPEX', payload: id });
+    syncDispatch({ type: 'REMOVE_CAPEX', payload: id });
   };
 
   const handleAdd = () => {
     if (!newItem.name || newItem.cost <= 0) return;
-    dispatch({
+    const newId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `auto_${Date.now()}`;
+    syncDispatch({
       type: 'ADD_CAPEX',
       payload: {
-        id: `auto_${Date.now()}`,
+        id: newId,
         category: 'Automação',
         name: newItem.name,
         cost: Number(newItem.cost),

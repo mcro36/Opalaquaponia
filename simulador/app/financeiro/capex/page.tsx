@@ -5,18 +5,18 @@ import EditableTable from "../../../components/EditableTable";
 import { Wallet, Download, RefreshCw } from "lucide-react";
 
 export default function CapexPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
 
   const handleUpdate = (item: any) => {
-    dispatch({ type: 'UPDATE_CAPEX', payload: item });
+    syncDispatch({ type: 'UPDATE_CAPEX', payload: item });
   };
 
   const handleRemove = (id: string) => {
-    dispatch({ type: 'REMOVE_CAPEX', payload: id });
+    syncDispatch({ type: 'REMOVE_CAPEX', payload: id });
   };
 
   const handleAdd = (item: any) => {
-    dispatch({ type: 'ADD_CAPEX', payload: item });
+    syncDispatch({ type: 'ADD_CAPEX', payload: item });
   };
 
   const exportJSON = () => {

@@ -4,20 +4,20 @@ import { useProject } from "../../../contexts/ProjectContext";
 import { Factory, ArrowRight, Wallet, Activity, CheckCircle2 } from "lucide-react";
 
 export default function RacaoPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
   
   const ownFeedEnabled = state.parameters.ownFeedEnabled;
 
   const toggleFeed = () => {
     const isNowEnabled = !ownFeedEnabled;
-    dispatch({ type: 'UPDATE_PARAM', payload: { key: 'ownFeedEnabled', value: isNowEnabled } });
+    syncDispatch({ type: 'UPDATE_PARAM', payload: { key: 'ownFeedEnabled', value: isNowEnabled } });
     
     // Simulate Business Rule Impact:
     // If own feed is produced: Better quality = lower FCA. Price/kg is assumed lower in OPEX global calculations.
     if (isNowEnabled) {
-      dispatch({ type: 'UPDATE_PARAM', payload: { key: 'fca', value: 1.0 } }); 
+      syncDispatch({ type: 'UPDATE_PARAM', payload: { key: 'fca', value: 1.0 } }); 
     } else {
-      dispatch({ type: 'UPDATE_PARAM', payload: { key: 'fca', value: 1.2 } }); 
+      syncDispatch({ type: 'UPDATE_PARAM', payload: { key: 'fca', value: 1.2 } }); 
     }
   };
 

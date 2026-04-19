@@ -43,7 +43,8 @@ export default function EditableTable({ data, columns, onUpdate, onRemove, onAdd
 
   const handleSaveNew = () => {
     if (!addFormData.name || (addFormData.cost === 0 && addFormData.monthlyCost === 0)) return;
-    onAdd({ ...addFormData, id: `${categoryName}_${Date.now()}`, category: categoryName });
+    const newId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `${categoryName}_${Date.now()}`;
+    onAdd({ ...addFormData, id: newId, category: categoryName });
     setAddFormData(defaultNewItem);
     setIsAdding(false);
   };

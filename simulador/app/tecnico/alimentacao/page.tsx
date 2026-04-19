@@ -4,7 +4,7 @@ import { useProject } from "../../../contexts/ProjectContext";
 import { Thermometer, Droplets, AlertCircle, Flame, Zap, DollarSign } from "lucide-react";
 
 export default function AlimentacaoPage() {
-  const { state, dispatch } = useProject();
+  const { state, syncDispatch } = useProject();
   
   const tempTarget = state.parameters.targetTemperature || 28;
   const climateEnabled = state.parameters.climateControlEnabled;
@@ -24,11 +24,11 @@ export default function AlimentacaoPage() {
   const monthlyFeedCost = totalBiomass * 0.02 * 30 * feedCostPerKg;
   
   const handleTempChange = (val: string) => {
-    dispatch({ type: 'UPDATE_PARAM', payload: { key: 'targetTemperature', value: Number(val) } });
+    syncDispatch({ type: 'UPDATE_PARAM', payload: { key: 'targetTemperature', value: Number(val) } });
   };
   
   const toggleClimate = () => {
-    dispatch({ type: 'UPDATE_PARAM', payload: { key: 'climateControlEnabled', value: !climateEnabled } });
+    syncDispatch({ type: 'UPDATE_PARAM', payload: { key: 'climateControlEnabled', value: !climateEnabled } });
   };
 
   return (
