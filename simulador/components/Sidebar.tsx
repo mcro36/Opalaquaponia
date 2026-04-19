@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Wind, Thermometer, Recycle, Wallet, Receipt, Route, ShieldAlert, Store, Users, ShoppingCart, TableProperties, PackageOpen, ArrowDownUp, UserCheck, Clock, Target, Activity, Droplets, FileCheck, CalendarDays, Map, AlertTriangle } from 'lucide-react';
+import { LayoutDashboard, Wind, Thermometer, Recycle, Wallet, Receipt, Route, ShieldAlert, Store, Users, ShoppingCart, TableProperties, PackageOpen, ArrowDownUp, UserCheck, Clock, Target, Activity, Droplets, FileCheck, CalendarDays, Map, AlertTriangle, ChevronDown, ChevronRight } from 'lucide-react';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -82,6 +83,29 @@ export default function Sidebar() {
     }
   ];
 
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+
+  // Configura os grupos inicialmente abertos com base na URL atual
+  useEffect(() => {
+    const initialState: Record<string, boolean> = { 'Geral': true };
+    navGroups.forEach(group => {
+      const hasActiveLink = group.links.some(link => 
+        pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/')
+      );
+      if (hasActiveLink) {
+        initialState[group.label] = true;
+      }
+    });
+    setExpandedGroups(initialState);
+  }, [pathname]);
+
+  const toggleGroup = (label: string) => {
+    setExpandedGroups(prev => ({
+      ...prev,
+      [label]: !prev[label]
+    }));
+  };
+
   return (
     <aside className="w-64 flex-shrink-0 bg-[#0a0f1c] border-r border-white/10 h-screen sticky top-0 flex flex-col p-5 overflow-y-auto custom-scrollbar">
       <div className="mb-8">
@@ -91,34 +115,47 @@ export default function Sidebar() {
         </div>
       </div>
       
-      <nav className="flex-1 space-y-6">
-        {navGroups.map((group) => (
-          <div key={group.label}>
-            <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-              {group.label}
-            </h3>
-            <div className="space-y-1">
-              {group.links.map((link) => {
-                const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/');
-                const Icon = link.icon;
-                return (
-                  <Link 
-                    key={link.href} 
-                    href={link.href}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                      isActive 
-                        ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30' 
-                        : 'text-gray-400 hover:bg-white/5 hover:text-white border border-transparent'
-                    }`}
-                  >
-                    <Icon size={16} className={isActive ? 'text-cyan-400' : 'text-gray-500'} />
-                    {link.name}
-                  </Link>
-                );
-              })}
+      <nav className="flex-1 space-y-4">
+        {navGroups.map((group) => {
+          const isExpanded = expandedGroups[group.label];
+
+          return (
+            <div key={group.label} className="border-b border-white/5 pb-3 last:border-0 last:pb-0">
+              <button 
+                onClick={() => toggleGroup(group.label)}
+                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-gray-400 hover:text-white uppercase tracking-wider transition-colors mb-1 rounded-lg hover:bg-white/5"
+              >
+                {group.label}
+                {isExpanded ? <ChevronDown size={14} className="text-cyan-500" /> : <ChevronRight size={14} />}
+              </button>
+              
+              <div 
+                className={`space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${
+                  isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                {group.links.map((link) => {
+                  const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/');
+                  const Icon = link.icon;
+                  return (
+                    <Link 
+                      key={link.href} 
+                      href={link.href}
+                      className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 border-l-2 ${
+                        isActive 
+                          ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400' 
+                          : 'border-transparent text-gray-400 hover:bg-white/5 hover:text-white hover:border-gray-500'
+                      }`}
+                    >
+                      <Icon size={16} className={isActive ? 'text-cyan-400' : 'text-gray-500'} />
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </nav>
       
       <div className="mt-auto pt-6 border-t border-white/5 text-[10px] text-gray-600 text-center font-mono">
