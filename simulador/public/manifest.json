@@ -1,6 +1,6 @@
 {
-  "name": "Opala Aquaponia - Simulador de Vendas",
-  "short_name": "Opala Aquaponia",
+  "name": "RJ Piscicultura - Simulador Industrial",
+  "short_name": "RJ Piscicultura",
   "description": "Simulador técnico e financeiro de Alta Densidade (BH) com modelagem termodinâmica e BFT.",
   "start_url": "/",
   "display": "standalone",

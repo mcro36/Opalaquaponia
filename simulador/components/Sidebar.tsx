@@ -3,91 +3,62 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Wind, Thermometer, Recycle, Wallet, Receipt, Route, ShieldAlert, Store, Users, ShoppingCart, TableProperties, PackageOpen, ArrowDownUp, UserCheck, Clock, Target, Activity, Droplets, FileCheck, CalendarDays, Map, AlertTriangle, ChevronDown, ChevronRight } from 'lucide-react';
+import { 
+  LayoutDashboard, Wind, Thermometer, Recycle, Wallet, Receipt, Route, 
+  ShieldAlert, Store, Users, ShoppingCart, TableProperties, PackageOpen, 
+  ArrowDownUp, UserCheck, Clock, Target, Activity, Droplets, FileCheck, 
+  CalendarDays, Map, AlertTriangle, ChevronDown, ChevronRight, Factory,
+  Cpu, Beaker, BarChart3, TrendingUp, AlertOctagon
+} from 'lucide-react';
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   const navGroups = [
     {
-      label: 'Geral',
+      label: 'SIMULADOR INDUSTRIAL',
       links: [
-        { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+        { name: 'Dashboard Executivo', href: '/', icon: LayoutDashboard },
+        { name: 'Tanques (Técnico)', href: '/tecnico/tanques', icon: Recycle },
+        { name: 'Climatização (Sazonal)', href: '/tecnico/climatizacao', icon: Thermometer },
+        { name: 'Ração (Fábrica)', href: '/tecnico/racao', icon: Factory },
+        { name: 'Aeração (Cálculos)', href: '/tecnico/aeracao', icon: Wind },
       ]
     },
     {
-      label: 'Produção',
+      label: 'FINANCEIRO & SAÚDE',
       links: [
-        { name: 'Lotes / Ciclos', href: '/operacao/lotes', icon: Route },
+        { name: 'Saúde Financeira 360°', href: '/financeiro/saude', icon: ShieldAlert },
+        { name: 'DRE Consolidada', href: '/financeiro/dre', icon: BarChart3 },
+        { name: 'Fluxo de Caixa (Curva J)', href: '/financeiro/fluxo-caixa', icon: TrendingUp },
+        { name: 'CAPEX (Investimento)', href: '/financeiro/capex', icon: Wallet },
+        { name: 'OPEX (Custos)', href: '/financeiro/opex', icon: Receipt },
+      ]
+    },
+    {
+      label: 'OPERAÇÃO REAL',
+      links: [
+        { name: 'Lotes Ativos', href: '/operacao/lotes', icon: Route },
         { name: 'Manejo Diário', href: '/operacao/manejo', icon: FileCheck },
-        { name: 'Tanques (Visão)', href: '/operacao/tanques', icon: Recycle },
-        { name: 'Aeração (Técnico)', href: '/tecnico/aeracao', icon: Wind },
-        { name: 'Alim. / Clima', href: '/tecnico/alimentacao', icon: Thermometer },
+        { name: 'Qualidade da Água', href: '/qualidade/agua', icon: Droplets },
+        { name: 'Insumos / Estoque', href: '/estoque/insumos', icon: PackageOpen },
       ]
     },
     {
-      label: 'Financeiro',
+      label: 'COMERCIAL & ESTRATÉGIA',
       links: [
-        { name: 'Transações Reais', href: '/financeiro/transacoes', icon: Wallet },
-        { name: 'DRE', href: '/financeiro/dre', icon: Receipt },
-        { name: 'Fluxo de Caixa', href: '/financeiro/fluxo-caixa', icon: Activity },
-        { name: 'Contas a Pagar/Rec', href: '/financeiro/contas', icon: Store },
-        { name: 'Saúde Financeira', href: '/financeiro/saude', icon: ShieldAlert },
-        { name: 'CAPEX (Est.)', href: '/financeiro/capex', icon: Wallet },
-        { name: 'OPEX (Est.)', href: '/financeiro/opex', icon: Receipt },
-      ]
-    },
-    {
-      label: 'Comercial',
-      links: [
-        { name: 'Clientes', href: '/comercial/clientes', icon: Users },
-        { name: 'Pedidos', href: '/comercial/pedidos', icon: ShoppingCart },
-        { name: 'Kanban', href: '/comercial/kanban', icon: TableProperties },
-      ]
-    },
-    {
-      label: 'Estoque',
-      links: [
-        { name: 'Insumos', href: '/estoque/insumos', icon: PackageOpen },
-        { name: 'Movimentações', href: '/estoque/movimentacoes', icon: ArrowDownUp },
-      ]
-    },
-    {
-      label: 'RH & Equipe',
-      links: [
-        { name: 'Equipe', href: '/rh/equipe', icon: UserCheck },
-        { name: 'Ponto', href: '/rh/ponto', icon: Clock },
-      ]
-    },
-    {
-      label: 'Metas',
-      links: [
-        { name: 'OKRs', href: '/metas', icon: Target },
-        { name: 'KPIs', href: '/metas/kpis', icon: Activity },
-      ]
-    },
-    {
-      label: 'Qualidade',
-      links: [
-        { name: 'Água', href: '/qualidade/agua', icon: Droplets },
-        { name: 'Laudos/Licenças', href: '/qualidade/laudos', icon: FileCheck },
-        { name: 'Calendário', href: '/calendario', icon: CalendarDays },
-      ]
-    },
-    {
-      label: 'Estratégia',
-      links: [
-        { name: 'Roadmap', href: '/roadmap', icon: Map },
-        { name: 'Riscos', href: '/riscos', icon: AlertTriangle },
+        { name: 'Pedidos & Vendas', href: '/comercial/pedidos', icon: ShoppingCart },
+        { name: 'Roadmap Estratégico', href: '/roadmap', icon: Map },
+        { name: 'Matriz de Riscos', href: '/riscos', icon: AlertTriangle },
+        { name: 'Stress Test (Pânico)', href: '/estratégia/stress', icon: AlertOctagon },
       ]
     }
   ];
 
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
 
-  // Configura os grupos inicialmente abertos com base na URL atual
   useEffect(() => {
-    const initialState: Record<string, boolean> = { 'Geral': true };
+    const initialState: Record<string, boolean> = { 'SIMULADOR INDUSTRIAL': true };
     navGroups.forEach(group => {
       const hasActiveLink = group.links.some(link => 
         pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/')
@@ -107,31 +78,39 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-[#0a0f1c] border-r border-white/10 h-screen sticky top-0 flex flex-col p-5 overflow-y-auto custom-scrollbar">
-      <div className="mb-8">
-        <h1 className="text-xl font-extrabold tracking-wider text-white">OPALA<span className="text-cyan-400">AQUAPONIA</span></h1>
-        <div className="text-[10px] mt-2 inline-block border border-cyan-500/40 text-cyan-400 px-2.5 py-1 rounded-full font-bold uppercase tracking-widest">
-          ERP Aquicultura
+    <aside className="w-64 flex-shrink-0 bg-[#0a0f1c] border-r border-white/10 h-screen sticky top-0 flex flex-col p-5 overflow-y-auto custom-scrollbar shadow-2xl">
+      <div className="mb-10 px-2">
+        <h1 className="text-xl font-extrabold tracking-tighter text-white flex items-center gap-2">
+          <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+            <Cpu className="text-[#0a0f1c]" size={18} />
+          </div>
+          RJ<span className="text-cyan-400">PISCICULTURA</span>
+        </h1>
+        <div className="text-[9px] mt-3 inline-block bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full font-bold uppercase tracking-[0.2em]">
+          Engine Industrial v4.0
         </div>
       </div>
       
-      <nav className="flex-1 space-y-4">
+      <nav className="flex-1 space-y-6">
         {navGroups.map((group) => {
           const isExpanded = expandedGroups[group.label];
 
           return (
-            <div key={group.label} className="border-b border-white/5 pb-3 last:border-0 last:pb-0">
+            <div key={group.label}>
               <button 
                 onClick={() => toggleGroup(group.label)}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-gray-400 hover:text-white uppercase tracking-wider transition-colors mb-1 rounded-lg hover:bg-white/5"
+                className="w-full flex items-center justify-between px-2 py-2 text-[10px] font-black text-gray-500 hover:text-cyan-400 uppercase tracking-widest transition-colors mb-2 group"
               >
                 {group.label}
-                {isExpanded ? <ChevronDown size={14} className="text-cyan-500" /> : <ChevronRight size={14} />}
+                <div className="flex items-center">
+                   <div className="h-[1px] w-8 bg-white/5 group-hover:bg-cyan-500/30 mr-2 transition-all"></div>
+                   {isExpanded ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+                </div>
               </button>
               
               <div 
                 className={`space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${
-                  isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  isExpanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
                 {group.links.map((link) => {
@@ -141,14 +120,17 @@ export default function Sidebar() {
                     <Link 
                       key={link.href} 
                       href={link.href}
-                      className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 border-l-2 ${
+                      className={`flex items-center gap-3 px-3 py-2.5 text-sm font-semibold transition-all duration-200 rounded-xl relative group ${
                         isActive 
-                          ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400' 
-                          : 'border-transparent text-gray-400 hover:bg-white/5 hover:text-white hover:border-gray-500'
+                          ? 'bg-cyan-500 text-[#0a0f1c] shadow-[0_4px_15px_-3px_rgba(6,182,212,0.4)]' 
+                          : 'text-gray-400 hover:bg-white/5 hover:text-white'
                       }`}
                     >
-                      <Icon size={16} className={isActive ? 'text-cyan-400' : 'text-gray-500'} />
+                      <Icon size={18} className={`${isActive ? 'text-[#0a0f1c]' : 'text-gray-500 group-hover:text-cyan-400'} transition-colors`} />
                       {link.name}
+                      {isActive && (
+                        <div className="absolute right-3 w-1.5 h-1.5 bg-[#0a0f1c] rounded-full"></div>
+                      )}
                     </Link>
                   );
                 })}
@@ -158,8 +140,13 @@ export default function Sidebar() {
         })}
       </nav>
       
-      <div className="mt-auto pt-6 border-t border-white/5 text-[10px] text-gray-600 text-center font-mono">
-        v4.0.0 — next.js
+      <div className="mt-auto pt-6 border-t border-white/5 text-[9px] text-gray-600 flex flex-col items-center gap-2">
+        <div className="flex gap-4">
+           <span className="hover:text-cyan-400 cursor-pointer transition-colors">API STATUS: ONLINE</span>
+        </div>
+        <div className="font-mono opacity-50 uppercase tracking-widest">
+           System.Encrypted.v4
+        </div>
       </div>
     </aside>
   );

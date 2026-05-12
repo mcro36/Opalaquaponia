@@ -116,7 +116,8 @@ export async function loadFullState(projectId = DEFAULT_PROJECT_ID) {
 
   return {
     phase: String(project.phase),
-    biomass: Object.keys(biomass).length > 0 ? biomass : { t1: 50, t2: 50, t3: 50, t4: 50, t5: 50, t6: 50 },
+    biomass: Object.keys(biomass).length > 0 ? biomass : { t1: 87, t2: 275, t3: 596, t4: 1040, t5: 1542, t6: 1913 },
+    activePhases: project.active_phases || [true, true, true, false, false],
     capexItems: capex.map((c: any) => ({
       id: String(c.id),
       category: String(c.category),
@@ -144,6 +145,7 @@ export async function loadFullState(projectId = DEFAULT_PROJECT_ID) {
       ],
       climateControlEnabled: Boolean(project.climate_control_enabled),
       ownFeedEnabled: Boolean(project.own_feed_enabled),
+      solarEnabled: Boolean(project.solar_enabled),
       linhagem: String(project.linhagem),
       reversaoSexual: Boolean(project.reversao_sexual),
       targetWeight: Number(project.target_weight_g),

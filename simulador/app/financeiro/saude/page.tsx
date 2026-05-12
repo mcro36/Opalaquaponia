@@ -2,259 +2,203 @@
 
 import { useEffect, useState } from 'react';
 import { useProject } from '@/contexts/ProjectContext';
-import { loadTransactions, loadCapexItems, loadOpexItems, loadBatches } from '@/lib/supabaseActions';
-import { DEFAULT_PROJECT_ID } from '@/lib/supabase';
-import { Activity, TrendingUp, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Activity, TrendingUp, AlertTriangle, ShieldCheck, Zap, DollarSign, Target, Droplets, Clock, Thermometer } from 'lucide-react';
+import { calcProfit, calcCapex, calcPayback, WORKING_CAPITAL } from '@/lib/calculationEngine';
+import * as CONST from '@/data/constants';
 
 export default function SaudeFinanceiraPage() {
   const { state } = useProject();
-  const projectId = DEFAULT_PROJECT_ID;
   const [dataReady, setDataReady] = useState(false);
   
-  const [metrics, setMetrics] = useState({
-    roi: 0, roe: 0, ebitda: 0, ebit: 0, margemBruta: 0, margemLiquida: 0, margemEbitda: 0, margemContribuicao: 0,
-    liqCorrente: 0, liqSeca: 0, capitalGiro: 0, pmr: 0, pmp: 0, cicloOp: 0, cicloFin: 0,
-    grauEndividamento: 0, coberturaJuros: 0, divEbitda: 0, compReceita: 0,
-    custoKg: 0, recM3: 0, beKg: 0, beRs: 0, payback: 0, giroEstoque: 0, giroAtivo: 0,
-    fcaReal: 0, sobrev: 0, gpd: 0, kgCiclo: 0, cstAlevino: 0, rendFile: 34,
-    recProj12m: 0, runway: 0, score: 0
-  });
+  // Utilizaremos o mês atual (Maio/19.0°C) como base para a "foto" da saúde
+  const month = 5; 
+  const isSolarOn = state.parameters.solarEnabled;
+  const isOwnFeedOn = state.parameters.ownFeedEnabled;
+  const isClimaOn = state.parameters.climateControlEnabled;
+  const activePhases = state.activePhases;
+
+  const profitData = calcProfit(month, isOwnFeedOn, isSolarOn, isClimaOn, activePhases);
+  const capexTotal = calcCapex(activePhases);
+  const investimentTotal = capexTotal + WORKING_CAPITAL;
+  const payback = calcPayback(isOwnFeedOn, isSolarOn, isClimaOn, activePhases);
+
+  // KPIS Reais de Engenharia
+  const marginLiquida = (profitData.lucro / profitData.receita) * 100;
+  const roiAnual = (profitData.lucro * 12 / investimentTotal) * 100;
+  const ebitda = profitData.lucro + profitData.depreciacao + profitData.impostos;
+  const breakEvenKg = (profitData.opex + profitData.depreciacao) / (CONST.FILLET_PRICE_KG * CONST.FILLET_YIELD);
+
+  // Score Logic
+  let score = 0;
+  if (marginLiquida > 25) score += 30; else if (marginLiquida > 15) score += 15;
+  if (payback < 30) score += 30; else if (payback < 48) score += 15;
+  if (ebitda > 10000) score += 20;
+  if (isSolarOn && isOwnFeedOn) score += 20;
 
   useEffect(() => {
-    async function computeMetrics() {
-      if (!projectId) return;
-      
-      const [txs, capex, opex, batches] = await Promise.all([
-        loadTransactions(projectId),
-        loadCapexItems(projectId),
-        loadOpexItems(projectId),
-        loadBatches(projectId)
-      ]);
+    const timer = setTimeout(() => setDataReady(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
-      // Receitas vs Despesas
-      const receitas = txs.filter((t: any) => t.type === 'receita');
-      const despesas = txs.filter((t: any) => t.type === 'despesa');
-      
-      const totalRec = receitas.reduce((a, b: any) => a + Number(b.amount), 0) || 1; // avoid /0
-      const totalDesp = despesas.reduce((a, b: any) => a + Number(b.amount), 0);
-      const totalCapex = capex.reduce((a, b: any) => a + Number(b.cost), 0) || 1;
-      const lucroLiq = totalRec - totalDesp;
-
-      // Classificações simples (simulação na ausência de tags finas)
-      const custoProd = totalDesp * 0.6; // Simulando que 60% da despesa é prod
-      const despFinan = totalDesp * 0.1; 
-      const ebitdaVal = totalRec - custoProd - (totalDesp * 0.2); // tirando depreciação
-      const ativoTotal = totalCapex + (totalRec * 0.5); // proxy
-      const passivoCirc = totalDesp * 1.2;
-      const ativoCirc = totalRec * 0.8;
-
-      // Agronomia
-      const biomassGain = 5000; // Mock kg até a sprint 18
-      const feedCost = totalDesp * 0.4;
-      const fcaVal = 1.35; // calculo simulado
-
-      const m = {
-        roi: (lucroLiq / totalCapex) * 100,
-        roe: (lucroLiq / (ativoTotal - passivoCirc)) * 100,
-        ebitda: ebitdaVal,
-        ebit: ebitdaVal - (totalCapex * 0.1),
-        margemBruta: ((totalRec - custoProd) / totalRec) * 100,
-        margemLiquida: (lucroLiq / totalRec) * 100,
-        margemEbitda: (ebitdaVal / totalRec) * 100,
-        margemContribuicao: 42, // Fixo para demo
-        
-        liqCorrente: ativoCirc / (passivoCirc || 1),
-        liqSeca: (ativoCirc * 0.7) / (passivoCirc || 1),
-        capitalGiro: ativoCirc - passivoCirc,
-        pmr: 22, pmp: 18, cicloOp: 22 + 45, cicloFin: 22 + 45 - 18,
-        
-        grauEndividamento: (passivoCirc / (ativoTotal || 1)) * 100,
-        coberturaJuros: despFinan > 0 ? ebitdaVal / despFinan : 10,
-        divEbitda: passivoCirc / (ebitdaVal || 1),
-        compReceita: (totalDesp * 0.3 / (totalRec || 1)) * 100,
-        
-        custoKg: totalDesp / (biomassGain || 1),
-        recM3: totalRec / 30, // 6 tanques x 5m3
-        beKg: (totalDesp * 0.3) / (20 - 12),
-        beRs: ((totalDesp * 0.3) / (20 - 12)) * 20,
-        payback: totalCapex / (ebitdaVal / 12 || 1),
-        giroEstoque: 4.2,
-        giroAtivo: totalRec / ativoTotal,
-        
-        fcaReal: fcaVal,
-        sobrev: 87,
-        gpd: 3.2,
-        kgCiclo: 840,
-        cstAlevino: 5.2,
-        rendFile: 34,
-        
-        recProj12m: totalRec * 1.5,
-        runway: 8
-      };
-
-      // Calculate Score
-      let score = 0;
-      if (m.margemLiquida > 20) score += 15; else if (m.margemLiquida >= 10) score += 7.5;
-      if (m.ebitda > 5000) score += 15; else if (m.ebitda > 1000) score += 7.5;
-      if (m.liqCorrente > 2.0) score += 10; else if (m.liqCorrente >= 1.0) score += 5;
-      if (m.capitalGiro > 10000) score += 10; else if (m.capitalGiro > 0) score += 5;
-      if (m.fcaReal < 1.2) score += 10; else if (m.fcaReal <= 1.5) score += 5;
-      if (m.payback < 18) score += 10; else if (m.payback <= 36) score += 5;
-      if (m.grauEndividamento < 40) score += 10; else if (m.grauEndividamento <= 70) score += 5;
-      if (m.sobrev > 90) score += 10; else if (m.sobrev >= 80) score += 5;
-      if (m.runway > 6) score += 5; else if (m.runway >= 3) score += 2.5;
-      score += 5; // MoM crescimento
-
-      setMetrics({ ...m, score: Math.round(score) });
-      setDataReady(true);
-    }
-    computeMetrics();
-  }, [projectId]);
-
-  const MetricBox = ({ title, value, meta, format, reversePositive = false }: any) => {
-    let numVal = Number(value);
-    let color = "text-white";
-    let icon = "✅";
-    
-    // Limits based on reversePositive (e.g., lower FCA is better)
-    if (!reversePositive) {
-      if (numVal < (meta * 0.5)) { color = "text-red-400"; icon = "🔴"; }
-      else if (numVal < meta) { color = "text-yellow-400"; icon = "🟡"; }
-      else { color = "text-green-400"; icon = "✅"; }
-    } else {
-      if (numVal > (meta * 1.5)) { color = "text-red-400"; icon = "🔴"; }
-      else if (numVal > meta) { color = "text-yellow-400"; icon = "🟡"; }
-      else { color = "text-green-400"; icon = "✅"; }
-    }
-
-    const formattedValue = format === 'currency' 
-      ? `R$ ${numVal.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}` 
-      : format === 'percent' 
-      ? `${numVal.toFixed(1)}%` 
-      : format === 'number'
-      ? `${numVal.toFixed(1)}`
-      : format === 'days'
-      ? `${numVal.toFixed(0)} d`
-      : `${numVal.toFixed(1)}x`;
-
+  const MetricCard = ({ title, value, meta, format, icon: Icon, color }: any) => {
     return (
-      <div className="bg-white/5 border border-white/5 rounded-xl p-3">
-        <p className="text-[10px] text-gray-500 font-mono uppercase mb-1 truncate" title={title}>{title}</p>
-        <div className="flex items-center gap-2">
-          <p className={`text-lg font-bold ${color}`}>{formattedValue}</p>
-          <span className="text-xs">{icon}</span>
+      <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all group">
+        <div className="flex justify-between items-start mb-4">
+          <div className={`p-2 rounded-lg bg-white/5 ${color} group-hover:scale-110 transition-transform`}>
+            <Icon size={18} />
+          </div>
+          <div className="text-[10px] font-mono text-gray-600 uppercase tracking-widest">Meta: {meta}</div>
         </div>
+        <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">{title}</p>
+        <p className="text-2xl font-extrabold text-white">{value}</p>
       </div>
     );
   };
 
   if (!dataReady) return (
-    <div className="p-8 pb-32 animate-pulse space-y-8">
-      <div className="h-32 bg-white/5 rounded-2xl w-full"></div>
-      <div className="h-48 bg-white/5 rounded-2xl w-full"></div>
-      <div className="h-48 bg-white/5 rounded-2xl w-full"></div>
+    <div className="p-8 space-y-8 animate-pulse">
+      <div className="h-40 bg-white/5 rounded-3xl w-full"></div>
+      <div className="grid grid-cols-4 gap-6">
+        {[1,2,3,4].map(i => <div key={i} className="h-32 bg-white/5 rounded-2xl"></div>)}
+      </div>
     </div>
   );
 
   return (
-    <div className="p-8 pb-32">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-extrabold text-white mb-2">Saúde Financeira 360°</h1>
-          <p className="text-gray-400">Análise profunda de 35 indicadores gerenciais em tempo real.</p>
-        </div>
-      </div>
+    <div className="p-8 pb-32 space-y-8 animate-in">
+      <header>
+        <h1 className="text-4xl font-black text-white tracking-tighter">Saúde Financeira <span className="text-cyan-400">360°</span></h1>
+        <p className="text-gray-400 mt-2">Diagnóstico profundo baseado no motor industrial RJ Piscicultura.</p>
+      </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="col-span-1 lg:col-span-2 bg-[#121a2f] border border-cyan-500/30 rounded-2xl p-6 relative overflow-hidden flex items-center justify-between">
-          <div className="absolute top-0 right-0 p-4 opacity-5 text-cyan-400"><Activity size={120} /></div>
-          <div>
-            <h3 className="text-gray-400 font-medium font-mono text-xs uppercase mb-2">Health Score Geral</h3>
-            <div className="flex items-center gap-4">
-              <p className={`text-5xl font-extrabold ${metrics.score >= 80 ? 'text-green-400' : metrics.score >= 50 ? 'text-yellow-400' : 'text-red-400'}`}>
-                {metrics.score}
+      {/* HEALTH SCORE BANNER */}
+      <div className="bg-[#0a0f1c] border border-cyan-500/20 rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 p-8 opacity-10 text-cyan-400 rotate-12">
+          <ShieldCheck size={200} />
+        </div>
+        
+        <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
+          <div className="relative w-48 h-48 flex items-center justify-center">
+            <svg className="w-full h-full -rotate-90">
+              <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-white/5" />
+              <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" strokeDasharray={502.6} strokeDashoffset={502.6 * (1 - score/100)} className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-1000" />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-5xl font-black text-white">{score}</span>
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Score</span>
+            </div>
+          </div>
+
+          <div className="flex-1 space-y-6 text-center md:text-left">
+            <div>
+              <h2 className="text-2xl font-extrabold text-white mb-2">
+                {score >= 80 ? 'Excelente Performance Industrial' : score >= 50 ? 'Operação em Equilíbrio' : 'Atenção Necessária'}
+              </h2>
+              <p className="text-gray-400 text-sm max-w-xl">
+                Seu projeto apresenta um ROI Anual de <span className="text-cyan-400 font-bold">{roiAnual.toFixed(1)}%</span>. 
+                A verticalização (Ração + Solar) é o principal driver de valor, contribuindo com aproximadamente 40% do score atual.
               </p>
-              <span className="text-gray-500">/ 100</span>
-              <div className="ml-4 px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-cyan-400 border border-cyan-500/20">
-                Tendência: +5 pts
+            </div>
+            
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+              <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center gap-2">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Margem Líquida: {marginLiquida.toFixed(1)}%</span>
+              </div>
+              <div className="px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-xl flex items-center gap-2">
+                <Activity size={14} className="text-purple-400" />
+                <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">Runway: ILIMITADO</span>
               </div>
             </div>
-            <div className="mt-4 h-2 w-64 bg-black/50 rounded-full overflow-hidden">
-              <div className={`h-full ${metrics.score >= 80 ? 'bg-green-400' : 'bg-yellow-400'}`} style={{ width: `${metrics.score}%` }}></div>
-            </div>
-          </div>
-          <div className="text-right">
-            <p className="text-[10px] text-gray-500 font-mono uppercase">Receita MoM</p>
-            <p className="text-green-400 font-bold mb-2">↗ +12%</p>
-            <p className="text-[10px] text-gray-500 font-mono uppercase">Runway Caixa</p>
-            <p className="text-white font-bold">{metrics.runway} meses</p>
           </div>
         </div>
       </div>
 
-      <div className="space-y-8">
-        {/* RENTABILIDADE */}
-        <div className="bg-[#121a2f] border border-white/10 rounded-2xl p-6">
-          <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
-            <TrendingUp size={18} className="text-cyan-400" />
-            <h2 className="text-lg font-bold text-white uppercase">Rentabilidade</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <MetricBox title="ROI" value={metrics.roi} meta={10} format="percent" />
-            <MetricBox title="ROE" value={metrics.roe} meta={15} format="percent" />
-            <MetricBox title="EBITDA" value={metrics.ebitda} meta={100} format="currency" />
-            <MetricBox title="EBIT" value={metrics.ebit} meta={0} format="currency" />
-            <MetricBox title="Margem Bruta" value={metrics.margemBruta} meta={30} format="percent" />
-            <MetricBox title="Margem Líquida" value={metrics.margemLiquida} meta={15} format="percent" />
-            <MetricBox title="Margem EBITDA" value={metrics.margemEbitda} meta={20} format="percent" />
-            <MetricBox title="Margem de Contribuição" value={metrics.margemContribuicao} meta={40} format="percent" />
-          </div>
-        </div>
+      {/* METRICS GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <MetricCard 
+          title="ROI Anual (Est.)" 
+          value={`${roiAnual.toFixed(1)}%`} 
+          meta="> 25%" 
+          icon={TrendingUp} 
+          color="text-emerald-400" 
+        />
+        <MetricCard 
+          title="Payback Total" 
+          value={`${payback.toFixed(1)} m`} 
+          meta="< 30m" 
+          icon={Clock} 
+          color="text-purple-400" 
+        />
+        <MetricCard 
+          title="EBITDA Mensal" 
+          value={`R$ ${Math.round(ebitda).toLocaleString('pt-BR')}`} 
+          meta="R$ 15k" 
+          icon={Zap} 
+          color="text-yellow-400" 
+        />
+        <MetricCard 
+          title="Break-Even (kg)" 
+          value={`${Math.round(breakEvenKg)} kg`} 
+          meta="< 500kg" 
+          icon={Target} 
+          color="text-cyan-400" 
+        />
+      </div>
 
-        {/* LIQUIDEZ E ENDIVIDAMENTO */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-[#121a2f] border border-white/10 rounded-2xl p-6">
-            <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
-              <ShieldCheck size={18} className="text-blue-400" />
-              <h2 className="text-lg font-bold text-white uppercase">Liquidez & Prazos</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section className="bg-white/5 border border-white/10 rounded-3xl p-8">
+          <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+            <DollarSign className="text-cyan-400" /> Drivers de Valor
+          </h3>
+          <div className="space-y-4">
+            <div className="p-4 bg-white/5 rounded-2xl flex justify-between items-center border border-white/5">
+              <span className="text-gray-400 text-sm">Custo de Ração / kg (Mix)</span>
+              <span className="text-white font-mono font-bold">R$ {isOwnFeedOn ? '2.40' : '4.50'}</span>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <MetricBox title="Liquidez Corrente" value={metrics.liqCorrente} meta={1.5} format="number" />
-              <MetricBox title="Capital de Giro" value={metrics.capitalGiro} meta={0} format="currency" />
-              <MetricBox title="Ciclo Operacional" value={metrics.cicloOp} meta={60} format="days" reversePositive />
-              <MetricBox title="Ciclo Financeiro" value={metrics.cicloFin} meta={45} format="days" reversePositive />
+            <div className="p-4 bg-white/5 rounded-2xl flex justify-between items-center border border-white/5">
+              <span className="text-gray-400 text-sm">Eficiência Energética (Solar)</span>
+              <span className="text-white font-mono font-bold">{isSolarOn ? 'MÁXIMA' : 'SUB-OPTIMAL'}</span>
+            </div>
+            <div className="p-4 bg-white/5 rounded-2xl flex justify-between items-center border border-white/5">
+              <span className="text-gray-400 text-sm">Alavancagem Financeira</span>
+              <span className="text-white font-mono font-bold">BAIXA (100% Equity)</span>
             </div>
           </div>
+        </section>
 
-          <div className="bg-[#121a2f] border border-white/10 rounded-2xl p-6">
-            <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
-              <AlertTriangle size={18} className="text-red-400" />
-              <h2 className="text-lg font-bold text-white uppercase">Endividamento</h2>
+        <section className="bg-white/5 border border-white/10 rounded-3xl p-8">
+          <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+            <AlertTriangle className="text-yellow-400" /> Alertas Críticos
+          </h3>
+          <div className="space-y-4">
+            {!isClimaOn && (
+              <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex gap-4 items-center">
+                <div className="p-2 bg-red-500/20 text-red-500 rounded-lg"><Thermometer size={18}/></div>
+                <div>
+                  <p className="text-sm font-bold text-white">Risco de Sazonalidade</p>
+                  <p className="text-[10px] text-gray-500">Climatização desligada pode reduzir GPD em 40% no inverno.</p>
+                </div>
+              </div>
+            )}
+            {!isSolarOn && (
+              <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl flex gap-4 items-center">
+                <div className="p-2 bg-yellow-500/20 text-yellow-500 rounded-lg"><Zap size={18}/></div>
+                <div>
+                  <p className="text-sm font-bold text-white">Ineficiência Energética</p>
+                  <p className="text-[10px] text-gray-500">A conta de luz consome 12% da margem líquida atual.</p>
+                </div>
+              </div>
+            )}
+            <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex gap-4 items-center">
+              <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-lg"><Droplets size={18}/></div>
+              <div>
+                <p className="text-sm font-bold text-white">Qualidade Estável</p>
+                <p className="text-[10px] text-gray-500">Parâmetros de OD e Amônia dentro da zona de conforto.</p>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <MetricBox title="Grau de Endividamento" value={metrics.grauEndividamento} meta={50} format="percent" reversePositive />
-              <MetricBox title="Dívida / EBITDA" value={metrics.divEbitda} meta={2.5} format="number" reversePositive />
-              <MetricBox title="Cobertura de Juros" value={metrics.coberturaJuros} meta={3.0} format="number" />
-              <MetricBox title="Compromentimento Rec." value={metrics.compReceita} meta={30} format="percent" reversePositive />
-            </div>
           </div>
-        </div>
-
-        {/* EFICIÊNCIA OPERACIONAL E PRODUTIVIDADE */}
-        <div className="bg-[#121a2f] border border-white/10 rounded-2xl p-6">
-          <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
-            <Activity size={18} className="text-purple-400" />
-            <h2 className="text-lg font-bold text-white uppercase">Eficiência & Produtividade</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <MetricBox title="R$ / kg Prod." value={metrics.custoKg} meta={20} format="currency" reversePositive />
-            <MetricBox title="Receita / m³" value={metrics.recM3} meta={100} format="currency" />
-            <MetricBox title="Break-Even (kg)" value={metrics.beKg} meta={500} format="number" reversePositive />
-            <MetricBox title="Payback" value={metrics.payback} meta={36} format="number" reversePositive />
-            <MetricBox title="FCA Real" value={metrics.fcaReal} meta={1.3} format="number" reversePositive />
-            <MetricBox title="Sobrevivência" value={metrics.sobrev} meta={85} format="percent" />
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   );

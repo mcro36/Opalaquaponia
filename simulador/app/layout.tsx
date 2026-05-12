@@ -7,8 +7,8 @@ import Sidebar from "../components/Sidebar";
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Opala Aquaponia - Simulador",
-  description: "Simulador técnico e financeiro para Aquicultura 4.0",
+  title: "RJ Piscicultura - Simulador Industrial",
+  description: "Simulador técnico e financeiro para Piscicultura Industrial em BH.",
   manifest: "/manifest.json"
 };
 

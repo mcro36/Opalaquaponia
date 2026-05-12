@@ -1,9 +1,10 @@
 "use client";
 
-import { useProject } from "../../contexts/ProjectContext";
-import RiskCard from "../../components/RiskCard";
+import { useProject } from "@/contexts/ProjectContext";
+import RiskCard from "@/components/RiskCard";
 import { Shield, Droplet, Beaker } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import * as CONST from "@/data/constants";
 import { useState } from "react";
 
 export default function RiscosPage() {
@@ -13,7 +14,7 @@ export default function RiscosPage() {
   const [racaoDiaKg, setRacaoDiaKg] = useState<number>(10); // 10kg/dia default
   
   // Active risk checks based on context
-  const targetTemp = state.parameters.targetTemperature || 28;
+  const targetTemp = CONST.TARGET_WATER_TEMP;
   const isClimateActive = state.parameters.climateControlEnabled;
   const isLethalRiskActive = !isClimateActive; 
   const isStressRiskActive = isClimateActive && (targetTemp > 31 || targetTemp < 24);

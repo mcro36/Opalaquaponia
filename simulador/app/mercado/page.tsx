@@ -1,8 +1,9 @@
 "use client";
 
-import { useProject } from "../../contexts/ProjectContext";
+import { useProject } from "@/contexts/ProjectContext";
 import { CloudRain, Store, Scale, ThermometerSnowflake, FileCheck } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
+import * as CONST from "@/data/constants";
 
 export default function MercadoPage() {
   const { state, syncDispatch } = useProject();
@@ -31,10 +32,10 @@ export default function MercadoPage() {
     { mes: 'Dez', temp: 22, aguaEstimada: 27, status: 'Ótimo' },
   ];
 
-  // If climate control is on, water temp is steady at targetTemp.
+  // If climate control is on, water temp is steady at TARGET_WATER_TEMP.
   const chartData = bhClimateData.map(d => ({
     ...d,
-    aguaControlada: isClimateActive ? (state.parameters.targetTemperature || 28) : d.aguaEstimada
+    aguaControlada: isClimateActive ? CONST.TARGET_WATER_TEMP : d.aguaEstimada
   }));
 
   const salesChannels = [
@@ -82,10 +83,10 @@ export default function MercadoPage() {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
-              <XAxis dataKey="mes" stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} />
-              <YAxis domain={[10, 35]} stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} />
+              <XAxis dataKey="mes" stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
+              <YAxis domain={[10, 35]} stroke="#4b5563" fontSize={12} tickLine={false} axisLine={false} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#0a0f1c', borderColor: '#ffffff20', borderRadius: '8px', color: '#fff' }}
+                contentStyle={{ backgroundColor: '#0a0f1c', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
               />
               <ReferenceLine y={28} stroke="#34d399" strokeDasharray="3 3" label={{ position: 'right', value: 'Ideal (28°C)', fill: '#34d399', fontSize: 10 }} />
               <ReferenceLine y={18} stroke="#ef4444" strokeDasharray="3 3" label={{ position: 'right', value: 'Crítico (<18°C)', fill: '#ef4444', fontSize: 10 }} />
@@ -118,7 +119,7 @@ export default function MercadoPage() {
 
           <div className="space-y-3">
             {salesChannels.map(c => (
-              <div key={c.id} className={`p-3 rounded-lg flex justify-between items-center border ${state.parameters.pricePerKg === c.preco ? 'bg-purple-500/20 border-purple-500/50' : 'bg-[#0a0f1c] border-white/5'}`}>
+              <div key={c.id} className={`p-3 rounded-lg flex justify-between items-center border transition-all ${state.parameters.pricePerKg === c.preco ? 'bg-purple-500/20 border-purple-500/50' : 'bg-[#0a0f1c] border-white/5'}`}>
                 <div>
                   <h4 className="text-sm font-bold text-gray-200">{c.canal}</h4>
                   <p className="text-xs text-gray-500">Volume: {c.volume}</p>

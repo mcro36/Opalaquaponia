@@ -8,12 +8,33 @@ import { DEFAULT_PROJECT_ID } from '../lib/supabase';
 // Types
 export interface CapexItem { id: string; category: string; name: string; cost: number; status: string; priority?: string; }
 export interface OpexItem { id: string; category: string; name: string; monthlyCost: number; yearlyCostView?: number; }
+
+export interface ProjectParameters {
+  scenario: 'otimista' | 'realista' | 'pessimista';
+  targetDensity: number;
+  fca: number;
+  pricePerKg: number;
+  climateControlEnabled: boolean;
+  ownFeedEnabled: boolean;
+  solarEnabled: boolean;
+  linhagem: string;
+  reversaoSexual: boolean;
+  targetWeight: number;
+  stressTest?: {
+    marketCrash: boolean; // Preço do filé cai 30%
+    feedCrisis: boolean;  // Preço da ração sobe 40%
+    climateDisaster: boolean; // Temperatura cai 5°C extra
+    highMortality: boolean;   // Sobrevivência cai 20%
+  };
+}
+
 export interface AppState {
   phase: string;
   biomass: Record<string, number>;
+  activePhases: boolean[];
   capexItems: CapexItem[];
   opexItems: OpexItem[];
-  parameters: Record<string, any>;
+  parameters: ProjectParameters;
 }
 
 type Action = 
@@ -24,8 +45,9 @@ type Action =
   | { type: 'ADD_OPEX'; payload: OpexItem }
   | { type: 'UPDATE_OPEX'; payload: OpexItem }
   | { type: 'REMOVE_OPEX'; payload: string }
-  | { type: 'UPDATE_PARAM'; payload: { key: string; value: any } }
-  | { type: 'UPDATE_BIOMASS'; payload: { tankId: string; value: number } };
+  | { type: 'UPDATE_PARAM'; payload: { key: keyof ProjectParameters; value: any } }
+  | { type: 'UPDATE_BIOMASS'; payload: { tankId: string; value: number } }
+  | { type: 'SET_ACTIVE_PHASES'; payload: boolean[] };
 
 // Reducer
 function appReducer(state: AppState, action: Action): AppState {
@@ -54,6 +76,8 @@ function appReducer(state: AppState, action: Action): AppState {
       return { ...state, parameters: { ...state.parameters, [action.payload.key]: action.payload.value } };
     case 'UPDATE_BIOMASS':
       return { ...state, biomass: { ...state.biomass, [action.payload.tankId]: action.payload.value } };
+    case 'SET_ACTIVE_PHASES':
+      return { ...state, activePhases: action.payload };
     default:
       return state;
   }
@@ -68,6 +92,8 @@ const ProjectContext = createContext<{
   dataSource: 'supabase' | 'localStorage' | 'default';
 } | undefined>(undefined);
 
+const LOCAL_STORAGE_KEY = 'rj_piscicultura_state';
+
 export function ProjectProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(appReducer, initialData as AppState);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,8 +105,8 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     async function init() {
       try {
         const supabaseState = await loadFullState();
-        if (supabaseState && supabaseState.capexItems.length > 0) {
-          dispatch({ type: 'SET_STATE', payload: supabaseState });
+        if (supabaseState && (supabaseState.capexItems?.length > 0 || supabaseState.parameters)) {
+          dispatch({ type: 'SET_STATE', payload: supabaseState as AppState });
           setDataSource('supabase');
           setIsLoading(false);
           setIsInitialized(true);
@@ -91,7 +117,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
       }
 
       // Fallback to localStorage
-      const saved = localStorage.getItem('opala_simulador_state');
+      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (saved) {
         try {
           dispatch({ type: 'SET_STATE', payload: JSON.parse(saved) });
@@ -112,15 +138,13 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   // 2. Persist project-level params to both localStorage and Supabase
   useEffect(() => {
     if (!isInitialized) return;
-    localStorage.setItem('opala_simulador_state', JSON.stringify(state));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
   }, [state, isInitialized]);
 
   // 3. syncDispatch: Dispatches locally AND syncs the specific action to Supabase
   const syncDispatch = useCallback((action: Action) => {
-    // First, apply locally (optimistic update)
     dispatch(action);
 
-    // Then, async sync to Supabase based on action type
     const sync = async () => {
       try {
         switch (action.type) {
@@ -139,18 +163,18 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
             await deleteOpexItem(action.payload);
             break;
           case 'UPDATE_PARAM':
-            // Map our param keys to Supabase column names
             const paramMap: Record<string, string> = {
               scenario: 'current_scenario',
               fca: 'fca_base',
               pricePerKg: 'price_per_kg',
               climateControlEnabled: 'climate_control_enabled',
               ownFeedEnabled: 'own_feed_enabled',
+              solarEnabled: 'solar_enabled',
               linhagem: 'linhagem',
               targetWeight: 'target_weight_g',
               targetDensity: 'target_density_kg_m3',
             };
-            const colName = paramMap[action.payload.key];
+            const colName = paramMap[action.payload.key as string];
             if (colName) {
               await updateProject(DEFAULT_PROJECT_ID, { [colName]: action.payload.value });
             }

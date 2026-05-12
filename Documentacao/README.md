@@ -1,27 +1,34 @@
-# Projeto Opala Aquaponia - Piscicultura 4.0
+# Projeto RJ Piscicultura — Piscicultura Intensiva
 
-Este projeto detalha a implementação de um sistema de produção super intensivo de tilápia, focado em alta tecnologia, automação e eficiência biológica.
+Sistema de produção intensiva de tilápia em 6 tanques de 60m³ (geomembrana) com ciclo escalonado de 6 meses, despesca mensal de ~1.913 kg vivo e venda de filé premium a R$ 45/kg. Localizado em Belo Horizonte, MG.
 
-## Visão Geral do Projeto
-O sistema é composto por 6 tanques suspensos de 60m³ cada, operando em um ciclo escalonado de 6 meses (uma despesca por mês). A meta é alcançar um controle total (100%) sobre as variáveis críticas, minimizando riscos e maximizando o ROI através da Aquicultura 4.0.
+## Números-Chave
+| Métrica | Valor |
+| :--- | :--- |
+| Capacidade total | 360m³ (6 × 60m³) |
+| Faturamento mensal | R$ 28.395 |
+| CAPEX Base (Fases 1-3) | R$ 195.900 |
+| CAPEX Completo (Fases 1-5) | R$ 349.700 |
+| Lucro mensal (ração própria + solar) | R$ 15.834 |
+| Payback (cenário completo) | 2,3 anos |
 
-## Estrutura da Documentação
-A documentação está dividida em fases evolutivas para facilitar a implementação e o investimento:
+## Documentação Técnica
 
-1. **[Aeração e Dimensionamento](1_Aereacao_e_Dimensionamento.md)**: Infraestrutura básica de suporte à vida.
-2. **[Automação e Sensores](2_Automacao_e_Sensores.md)**: Inteligência e monitoramento de parâmetros críticos (OD, pH, Amônia).
-3. **[Alimentação e Climatizacao](3_Alimentacao_e_Climatizacao.md)**: Eficiência térmica e alimentação de precisão com visão computacional.
-4. **[Segurança e Gestão Total](4_Seguranca_e_Gestao_Total.md)**: Redundância energética, Bioflocos e gestão de qualidade (Off-flavor).
-5. **[Produção de Ração Circular](5_Producao_de_Racao_Circular.md)**: Fábrica própria de ração extrusada reaproveitando resíduos.
-6. **[Financeiro e Viabilidade](6_Financeiro_e_Viabilidade.md)**: Análise de custos (CAPEX/OPEX), ROI e comparativos de eficiência.
-7. **[Plano de Negócios Piloto e Expansão](7_Plano_Negocios_Piloto_e_Expansao.md)**: Estratégia de lucro e cronograma para crescer de 6m³ para 360m³.
-8. **[Riscos e Desafios Mapeados](8_Riscos_e_Desafios_Mapeados.md)**: Auditoria de dados e análise de riscos para pequena escala.
-9. **[CAPEX Detalhado](9_CAPEX_Detalhado.md)**: Detalhamento de investimentos em infraestrutura e tecnologia.
-10. **[OPEX Detalhado](10_OPEX_Detalhado.md)**: Detalhamento de custos operacionais e recorrência.
+| # | Documento | Fase | Conteúdo |
+| :---: | :--- | :---: | :--- |
+| 01 | [Infraestrutura e Aeração](01_Infraestrutura_e_Aeracao.md) | 1 | Tanques, Airlifts, Dual Drain Cornell |
+| 02 | [Automação e Segurança](02_Automacao_e_Seguranca.md) | 2 | Sensores OD multiplexados, inversores, gerador |
+| 03 | [Climatização e Alimentação](03_Climatizacao_e_Alimentacao.md) | 3 | Bomba de Calor, lã de rocha, bolas flutuantes |
+| 04 | [Fábrica de Ração](04_Fabrica_de_Racao.md) | 4 | Extrusora, formulação, silagem em IBC |
+| 05 | [Energia Solar](05_Energia_Solar.md) | 5 | Sistema 21 kWp, Fio B, dimensionamento |
+| 06 | [Qualidade, Riscos e Licenciamento](06_Qualidade_Riscos_e_Licenciamento.md) | — | Depuração, riscos, licenças MG (COPAM/IGAM/IMA) |
+| 07 | [Plano Financeiro](07_Plano_Financeiro.md) | — | CAPEX, OPEX, capital de giro, fluxo de caixa |
 
-## Resumo das Fases de Investimento
-- **Fase 1 (Aeração)**: Base vital para densidades acima de 30kg/m³.
-- **Fase 2 (Automação)**: Redução de 40% na conta de luz e ajuste fino de oxigênio/amônia.
-- **Fase 3 (Performance)**: Aceleração do crescimento e redução do desperdício de ração.
-- **Fase 4 (Segurança)**: Eliminação do erro humano e garantia de lucro.
-- **Fase 5 (Economia Circular)**: Independência de mercado e redução drástica do custo do alimento.
+## Software
+- [Plano de Evolução do Simulador](PLANO_EVOLUCAO_SIMULADOR.md) — Regras de negócio para a aplicação React/Next.js.
+
+## Princípios de Engenharia
+1. **Verticalização Total:** Produzir a própria ração (Fase 4) e energia (Fase 5) dobra a margem de lucro.
+2. **Airlifts > Bombas elétricas:** Circulação de água sem motores submersos.
+3. **Isolamento > Potência:** Retenção térmica é mais barata que aquecimento mecânico.
+4. **Modularidade:** Crescimento em 5 fases, permitindo que a operação inicial financie as expansões tecnológicas.

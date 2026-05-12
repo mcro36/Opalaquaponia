@@ -1,5 +1,5 @@
 -- =============================================
--- Opala Aquaponia — Supabase Migration v1.0
+-- RJ Piscicultura — Supabase Migration v1.0
 -- Execute este script no SQL Editor do Supabase
 -- =============================================
 
@@ -262,14 +262,14 @@ CREATE TRIGGER trg_projects_updated
 
 -- Usuário padrão
 INSERT INTO users (id, name, email) VALUES
-    ('a0000000-0000-0000-0000-000000000001', 'Rodrigo Leite', 'rnleite@opala.com');
+    ('a0000000-0000-0000-0000-000000000001', 'Rodrigo Leite', 'contato@rjpiscicultura.com.br');
 
 -- Projeto
 INSERT INTO projects (id, user_id, name, phase, linhagem, reversao_sexual, target_weight_g, target_density_kg_m3, price_per_kg, fca_base)
 VALUES (
     'b0000000-0000-0000-0000-000000000001',
     'a0000000-0000-0000-0000-000000000001',
-    'Opala BH — Piloto 30m³', 'pilot', 'gift', true, 800, 35, 50, 1.2
+    'RJ Piscicultura — Unidade BH', 'production', 'gift', true, 800, 35, 45, 1.2
 );
 
 -- 6 Tanques
