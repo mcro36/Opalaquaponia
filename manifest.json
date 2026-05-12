@@ -1,0 +1,16 @@
+{
+  "name": "RJ Piscicultura - Simulador Industrial",
+  "short_name": "RJ Piscicultura",
+  "description": "Simulador técnico e financeiro de Alta Densidade (BH) com modelagem termodinâmica e BFT.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2dd4bf",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
