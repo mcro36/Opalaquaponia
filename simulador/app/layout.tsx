@@ -9,7 +9,7 @@ const outfit = Outfit({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "RJ Piscicultura - Simulador Industrial",
   description: "Simulador técnico e financeiro para Piscicultura Industrial em BH.",
-  manifest: "/manifest.json"
+  manifest: "manifest.json"
 };
 
 export default function RootLayout({

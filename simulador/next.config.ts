@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   basePath: "/rjpiscicultura",
-  assetPrefix: "/rjpiscicultura/",
   images: { unoptimized: true },
 };
 
