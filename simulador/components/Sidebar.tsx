@@ -8,7 +8,7 @@ import {
   ShieldAlert, Store, Users, ShoppingCart, TableProperties, PackageOpen, 
   ArrowDownUp, UserCheck, Clock, Target, Activity, Droplets, FileCheck, 
   CalendarDays, Map, AlertTriangle, ChevronDown, ChevronRight, Factory,
-  Cpu, Beaker, BarChart3, TrendingUp, AlertOctagon
+  Cpu, Beaker, BarChart3, TrendingUp, AlertOctagon, FileText
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -33,6 +33,7 @@ export default function Sidebar() {
         { name: 'Fluxo de Caixa (Curva J)', href: '/financeiro/fluxo-caixa', icon: TrendingUp },
         { name: 'CAPEX (Investimento)', href: '/financeiro/capex', icon: Wallet },
         { name: 'OPEX (Custos)', href: '/financeiro/opex', icon: Receipt },
+        { name: 'Histórico RI', href: '/historico', icon: FileText },
       ]
     },
     {
