@@ -19,6 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: `
+          body { background-color: #060913 !important; color: #e5e7eb !important; margin: 0; }
+          * { box-sizing: border-box; }
+        ` }} />
+      </head>
       <body className={`${outfit.className} bg-[#060913] text-gray-100 antialiased min-h-screen flex`}>
         <ProjectProvider>
           <Sidebar />
