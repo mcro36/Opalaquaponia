@@ -46,13 +46,30 @@ Sem aquecimento, a produção fica inviável por 3-4 meses/ano (Mai-Ago). A Bomb
 | Lateral (com Lã de Rocha 50mm) | 257 | 1,5 |
 | Superfície (com Bolas Flutuantes) | 2.150 | 12,9 |
 | Fundo (contato com solo, ΔT menor) | 300 | 1,8 |
-| **TOTAL** | **2.707** | **16,2 kW** |
+| **Subtotal estrutural** | **2.707** | **16,2 kW** |
+
+### Carga Térmica da Água de Reposição
+
+A renovação parcial dos tanques (5–10% do volume/dia) e o abate/filetagem introduzem água fria do poço artesiano (~18°C no inverno). Esta carga não estava no cálculo original e deve ser incluída.
+
+- **Renovação diária estimada:** 5% × 360m³ = 18 m³/dia
+- **ΔT:** 28°C − 18°C = 10°C
+- **Potência necessária:** 18.000 L × 4.186 J/kg·°C × 10°C / 86.400s = **8,7 kW**
+- **Observação:** A água de poço artesiano tende a ser mais constante (15–20°C o ano todo), atenuando o pico de verão mas mantendo carga relevante no inverno.
+
+| Componente | Carga (kW) |
+| :--- | :---: |
+| Perdas estruturais (6 tanques, julho) | 16,2 |
+| Aquecimento água de reposição (18 m³/dia, ΔT 10°C) | 8,7 |
+| **TOTAL PIOR CASO** | **24,9 kW** |
 
 ### Especificação
-- **Potência térmica necessária:** ~16 kW (55.000 BTU/h)
-- **Com margem de segurança (+25%):** ~20 kW (**68.000 BTU/h**)
-- **Equipamento recomendado:** Bomba de Calor Inverter de **80.000 a 100.000 BTU/h** (COP ≥ 5,0)
-- **Consumo elétrico médio (COP 5):** 3,2 a 4,0 kW elétrico
+- **Potência térmica total (pior caso):** ~25 kW (85.000 BTU/h)
+- **Com margem de segurança (+15%):** ~28,8 kW (**98.000 BTU/h**)
+- **Equipamento recomendado:** Bomba de Calor Inverter de **100.000 BTU/h** (COP ≥ 5,0)
+- **Consumo elétrico médio (COP 5):** 4,0 a 5,0 kW elétrico
+
+*Nota: A carga de reposição hídrica concentra-se nos momentos de renovação — a bomba de calor Inverter adapta a potência continuamente, cobrindo os picos sem operar a 100% o tempo todo.*
 
 ### Custo Operacional Mensal (Tarifa CEMIG R$ 0,85/kWh)
 
@@ -79,8 +96,9 @@ Sem aquecimento, a produção fica inviável por 3-4 meses/ano (Mai-Ago). A Bomb
 - **Trava de segurança:** CLP bloqueia alimentação se OD < 4,0 mg/L.
 
 ## Riscos e Limitações
-- **Bomba de Calor como único agente térmico:** Sem estufa ou lonas, a carga térmica recai 100% sobre a bomba. Se ela falhar no inverno, a temperatura cai rapidamente. Recomendação: manter contato com assistência técnica para reparo em 24h.
-- **Bolas flutuantes x manejo:** As bolas precisam ser afastadas durante a alimentação e biometrias. Redes ou barreiras flutuantes podem facilitar isso.
+- **Bomba de Calor como único agente térmico:** Sem estufa ou lonas, a carga térmica recai 100% sobre a bomba. Se ela falhar no inverno, a temperatura cai progressivamente (não imediatamente — a massa d'água de 360m³ tem inércia). Recomendação: manter contrato de assistência técnica com prazo de atendimento ≤ 24h. O isolamento e as bolas flutuantes ganham tempo para o reparo.
+- **Carga de reposição hídrica:** A água fria do poço artesiano (~18°C) representa quase 35% da carga térmica total no pior caso. Minimizar renovações desnecessárias durante ondas de frio reduz o consumo da bomba.
+- **Bolas flutuantes x manejo:** As bolas precisam ser afastadas durante a alimentação e biometrias. Redes divisórias flutuantes afastadas para um lado facilitam o acesso sem precisar remover as bolas individualmente.
 
 ## Custos Estimados — Fase 3
 

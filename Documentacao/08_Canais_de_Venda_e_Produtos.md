@@ -1,7 +1,7 @@
 # 08. Canais de Venda e Produtos
 
 ## Resumo
-Estratégia comercial com mix de **80% B2B** (restaurantes) e **20% B2C** (feiras/mercados). Portfólio de dois produtos: filé depurado premium e linguiça artesanal de tilápia. A linguiça aproveita a barriguinha — subproduto limitante — e os recortes da filetagem, gerando receita incremental de ~R$ 6.990/mês sem aumentar a produção de peixes.
+Estratégia comercial com mix de **80% B2B** (restaurantes) e **20% B2C** (feiras/mercados). Portfólio de três produtos: filé depurado premium, linguiça fresca e linguiça defumada artesanal de tilápia. A linguiça aproveita a barriguinha — subproduto limitante — e os recortes da filetagem, gerando receita incremental de ~R$ 7.000/mês sem aumentar a produção de peixes.
 
 ---
 
@@ -16,6 +16,9 @@ O projeto adota **restaurantes como canal principal** (B2B, 80% do volume) pelo 
 
 ### Preço médio ponderado (filé)
 `(0,80 × R$ 45,00) + (0,20 × R$ 55,00) = **R$ 47,00/kg**`
+
+### Diversificação da Carteira B2B
+Para evitar concentração de risco, manter no mínimo **8–10 restaurantes ativos** de modo que nenhum cliente represente mais de 15–20% do faturamento B2B. Prospectar restaurantes de diferentes segmentos (japonês, italiano, frutos do mar, self-service) para diversificar demanda.
 
 ### Canais de Mercado — Referência para Expansão
 | Canal | Preço (R$/kg) | Volume Potencial | Licença |
@@ -32,11 +35,20 @@ O projeto adota **restaurantes como canal principal** (B2B, 80% do volume) pelo 
 ## 2. Linguiça Artesanal de Tilápia
 
 ### 2.1 Justificativa
-A **barriguinha** (belly flap — retirada durante a filetagem) representa ~5% do peso vivo e tem baixo valor de mercado se vendida in natura. Processada em linguiça junto com os recortes da filetagem, gera produto de valor agregado, diferenciação de portfólio e receita adicional de ~R$ 6.990/mês.
+A **barriguinha** (belly flap — retirada durante a filetagem) representa ~5% do peso vivo e tem baixo valor de mercado se vendida in natura. Processada em linguiça junto com os recortes da filetagem, gera produto de valor agregado, diferenciação de portfólio e receita adicional de ~R$ 7.000/mês.
 
-### 2.2 Dimensionamento do Processamento por Despesca (1.913 kg vivo)
+### 2.2 Tipos de Linguiça Produzida
 
-O resíduo de 67% (anteriormente tratado como bloco único) é agora subdivido:
+| Tipo | Shelf Life (refrigerado) | Shelf Life (congelado) | Diferencial |
+| :--- | :---: | :---: | :--- |
+| Fresca | 5–7 dias | 3–6 meses | Sabor delicado, embalagem a vácuo simples |
+| Defumada | 20–30 dias | Até 12 meses | Sabor marcante, maior prazo de validade, maior valor percebido |
+
+**Embalagem:** Ambos os tipos em embalagem a vácuo simples e econômica (seladora já incluída no CAPEX Fase 1). Rótulo básico com identificação do produto, SIE-MG, data de validade e peso.
+
+### 2.3 Dimensionamento do Processamento por Despesca (1.913 kg vivo)
+
+O resíduo de 67% (anteriormente tratado como bloco único) é agora subdividido:
 
 | Sub-produto | % Peso Vivo | Kg/Despesca | Destinação |
 | :--- | :---: | :---: | :--- |
@@ -46,7 +58,7 @@ O resíduo de 67% (anteriormente tratado como bloco único) é agora subdivido:
 | Resíduo bruto (cabeças, espinha, vísceras, pele) | 58% | 1.109 kg | Graxaria |
 | **TOTAL** | **100%** | **1.913 kg** | |
 
-### 2.3 Formulação da Linguiça
+### 2.4 Formulação da Linguiça
 
 A barriguinha (40% da fórmula) é o fator limitante — sua quantidade define o teto de produção mensal.
 
@@ -58,9 +70,9 @@ A barriguinha (40% da fórmula) é o fator limitante — sua quantidade define o
 | **Mix bruto** | **100%** | **240 kg** | |
 | Rendimento (90%) | | **216 kg linguiça/mês** | |
 
-*Para escalar a produção de linguiça além de 216 kg/mês seria necessário aumentar o número de tanques ou adquirir barriguinha de terceiros.*
+*Para escalar a produção além de 216 kg/mês seria necessário aumentar o número de tanques ou adquirir barriguinha de terceiros.*
 
-### 2.4 Receita da Linguiça
+### 2.5 Receita da Linguiça
 
 O mesmo mix 80/20 B2B/B2C se aplica ao produto linguiça:
 
@@ -70,17 +82,37 @@ O mesmo mix 80/20 B2B/B2C se aplica ao produto linguiça:
 | B2C — Feiras / Mercados | 20% | 43 kg | R$ 42,00 | R$ 1.806 |
 | **Total linguiça** | | **216 kg** | **~R$ 32,39/kg** | **R$ 6.996** |
 
-### 2.5 Equipamentos de Processamento (Fase 1 — instalados antes da primeira despesca)
+### 2.6 Logística de Distribuição — Cadeia de Frio
 
-A linguiça começa na **primeira despesca (mês 7)**. Os equipamentos fazem parte do CAPEX da Fase 1 e devem estar instalados antes do início da produção.
+Para produtos de origem animal (filé fresco, linguiça fresca), o SIE-MG exige transporte em condições de temperatura controlada. Solução adotada: **caixas de isopor com gelo reciclável** (gel pack), sem necessidade de veículo refrigerado.
+
+| Item | Especificação | Custo (R$) |
+| :--- | :--- | :--- |
+| Caixas de isopor 30 L | Reutilizáveis, 3–4 unidades | 80–120 (compra única) |
+| Gelo em gel (packs reutilizáveis) | Congelar na fazenda antes de cada entrega | 60–100 (compra única) |
+| **Custo de capital (único)** | | **~R$ 180** |
+| **Custo operacional** | Só reposição eventual | **< R$ 30/mês** |
+
+**Protocolo de entrega:**
+1. Produto embalado a vácuo e pré-resfriado a 2–4°C
+2. Caixa de isopor com gel pack previamente congelado (-18°C)
+3. Temperatura interna mantida abaixo de 7°C por 4–8 horas (suficiente para rotas locais em BH)
+4. Entregas B2B priorizadas pela manhã (menor tempo de transporte)
+
+*Para a linguiça defumada congelada: embalar congelada, usar isopor normal sem necessidade de gel pack para rotas < 1h.*
+
+### 2.7 Equipamentos de Processamento (Fase 1 — instalados antes da primeira despesca)
+
+A linguiça começa na **primeira despesca (mês 7)**. Os equipamentos fazem parte do CAPEX da Fase 1 e devem estar instalados antes do início da produção. Ver tabela completa em [Doc 01 — Infraestrutura e Aeração](01_Infraestrutura_e_Aeracao.md).
 
 | Item | Qtd | Valor (R$) |
 | :--- | :---: | :--- |
 | Moedor industrial de carne | 1 | 4.000 |
 | Embutideira industrial | 1 | 4.500 |
 | Seladora a vácuo | 1 | 2.500 |
-| Freezer horizontal adicional (200 L) | 1 | 2.000 |
-| **TOTAL LINGUIÇA** | | **R$ 13.000** |
+| Freezer horizontal 200 L | 1 | 2.000 |
+| Defumador semi-industrial (câmara 50–100 kg/lote) | 1 | 4.000 |
+| **TOTAL LINGUIÇA + DEFUMAÇÃO** | | **R$ 17.000** |
 
 ---
 
@@ -112,7 +144,7 @@ A linguiça começa na **primeira despesca (mês 7)**. Os equipamentos fazem par
 
 | Item | Impacto Mensal (R$) |
 | :--- | :---: |
-| Temperos, tripa/casing e embalagem (linguiça) | +R$ 1.500 |
+| Temperos, tripa/casing, embalagem e insumos defumação | +R$ 1.500 |
 | Energia e insumos operacionais da graxaria | +R$ 350 |
 | Economia — farinha de peixe internalizada (146 kg × R$ 4,00) | −R$ 584 |
 | Economia — óleo de soja substituído por óleo de peixe (58 kg × R$ 6,00) | −R$ 348 |
@@ -122,7 +154,7 @@ A linguiça começa na **primeira despesca (mês 7)**. Os equipamentos fazem par
 
 | Métrica | Valor |
 | :--- | :---: |
-| Lucro base (Fases 1–5, ração própria + solar) | R$ 15.834 |
+| Lucro base (Fases 1–5, ração própria + solar 26 kWp) | R$ 16.266 |
 | + Receita incremental (linguiça + mix B2C + farinha) | +R$ 4.162 |
 | − OPEX incremental | −R$ 918 |
-| **Novo Lucro Mensal** | **~R$ 19.078** |
+| **Novo Lucro Operacional Mensal** | **~R$ 19.510** |

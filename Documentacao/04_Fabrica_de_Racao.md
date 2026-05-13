@@ -68,8 +68,8 @@ Resíduo bruto (1.138 kg/mês)
    │      ├─► SÓLIDO (torta): secagem ─────────────────► (gases do secador)
    │      │        └─► FARINHA DE PEIXE (~60% PB)
    │      │
-   │      └─► LÍQUIDO (caldo): centrifugação → ÓLEO DE PEIXE
-   │                                          └─► Água de cola (descarte)
+   │      └─► LÍQUIDO (caldo): centrifugação → ÓLEO DE PEIXE + antioxidante
+   │                                          └─► Água de cola → irrigação
    └─► Produção mensal estimada
 ```
 
@@ -125,6 +125,26 @@ A graxaria torna a fazenda autossuficiente nos dois insumos de origem animal da 
 
 *O excedente de farinha de peixe (~104 kg/mês) pode ser vendido a R$ 4,00/kg → receita adicional de R$ 416/mês.*
 
+### Estabilização do Óleo de Peixe — Antioxidante Obrigatório
+
+O óleo de peixe possui alto teor de ácidos graxos poli-insaturados (EPA, DHA) que oxidam rapidamente em contato com o ar. **Sem proteção antioxidante, o óleo ranfia em 2–5 dias** a temperatura ambiente, gerando peróxidos lipídicos que causam hepatotoxicidade e reduzem severamente o FCE dos peixes.
+
+**Protocolo obrigatório:**
+- Adicionar antioxidante imediatamente após a extração por centrifugação, antes do armazenamento
+- **Opção 1 — BHT (Butil-Hidroxi-Tolueno):** 100–200 ppm do peso do óleo. Sintético, altamente eficaz, baixo custo (~R$ 30/kg). Dose: 0,1–0,2 g/kg de óleo.
+- **Opção 2 — Tocoferóis naturais (vitamina E):** 500–1.000 ppm. Aceito em produção orgânica/natural. Custo ~R$ 80/kg.
+- **Armazenamento:** Tanques fechados, atmosfera de nitrogênio ou CO₂ se possível; temperatura < 20°C; uso preferencial em até 30 dias.
+
+### Água de Cola — Aproveitamento em Irrigação
+
+A centrifugação gera **água de cola** (stick water): líquido rico em proteínas solúveis, peptídeos, aminoácidos livres e sais minerais (~1–3% de PB), com DBO elevada (5.000–15.000 mg/L). Descarte direto em efluentes viola COPAM.
+
+**Uso em irrigação:** A água de cola pode ser diluída e utilizada como **biofertilizante líquido** para irrigação de hortas, pastagens ou culturas anuais no próprio terreno:
+- Diluição recomendada: 1:10 a 1:20 (agua de cola : água limpa) para evitar fitotoxicidade
+- Volume gerado: estimado ~50–80 L/despesca (~600–960 L/ano)
+- Benefício: fornece nitrogênio orgânico e fósforo para as plantas
+- **Restrição:** Não aplicar em áreas próximas à captação do poço artesiano. Verificar com agrônomo as culturas compatíveis.
+
 ### Equipamentos — Graxaria
 
 | Item | Qtd | Valor (R$) |
@@ -144,7 +164,15 @@ A graxaria torna a fazenda autossuficiente nos dois insumos de origem animal da 
 ## Riscos e Limitações
 - **Formulação nutricional:** Erros na proporção de aminoácidos essenciais (lisina, metionina) podem degradar o FCA. Recomenda-se consultar um zootecnista para validar a fórmula antes de escalar.
 - **Controle de umidade:** Ração com umidade > 10% mofa rapidamente. A secagem deve atingir < 10%.
-- **Extrusora:** Equipamento de alto custo unitário. Uma falha mecânica sem peça de reposição pode forçar a compra emergencial de ração comercial por semanas.
+- **Extrusora:** Equipamento de alto custo unitário. Uma falha mecânica pode forçar compra emergencial de ração comercial.
+- **Óleo sem antioxidante:** Risco crítico de lote de ração rançosa causando hepatotoxicidade nos peixes. Manter estoque de antioxidante sempre disponível.
+
+### Protocolo de Contingência — Falha da Extrusora
+
+Para evitar interrupção da alimentação durante falha mecânica da extrusora:
+1. **Estoque mínimo de segurança:** Manter sempre 1 semana de ração comercial em depósito (~730 kg × R$ 4,45 ≈ R$ 3.250 de capital imobilizado).
+2. **Fornecedores homologados:** Cadastrar ao menos 2 fornecedores de ração comercial 32% PB com capacidade de entrega em 24–48h.
+3. **Peças de reposição críticas:** Manter estoque mínimo de rosca de extrusão reserva e vedações do cabeçote — peças mais sujeitas a desgaste.
 
 ## Custos Estimados — Fase 4 (Fábrica de Ração + Graxaria + Processamento)
 
