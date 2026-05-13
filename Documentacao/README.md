@@ -5,12 +5,12 @@ Sistema de produção intensiva de tilápia em 6 tanques de 60m³ + 1 tanque de 
 ## Números-Chave
 | Métrica | Valor |
 | :--- | :--- |
-| Capacidade total | 360m³ (6 × 60m³) + depuração 15m³ |
+| Capacidade total | 360m³ (6 × 60m³ produção) + 60m³ buffer/depuração |
 | Faturamento mensal (filé + linguiça + graxaria) | R$ 32.557 |
-| CAPEX Base (Fases 1-3) | R$ 219.900 |
-| CAPEX Completo (Fases 1-5) | R$ 449.700 |
+| CAPEX Base (Fases 1-3) | R$ 216.900 |
+| CAPEX Completo (Fases 1-5) | R$ 446.700 |
 | Lucro operacional mensal (completo + linguiça + graxaria) | R$ 19.510 |
-| Lucro econômico mensal (ajustado depreciação + FUNRURAL) | R$ 15.078 |
+| Lucro econômico mensal (ajustado depreciação + FUNRURAL) | R$ 15.104 |
 | Margem operacional | 59,9% |
 | Payback (cenário completo) | 2,3 anos |
 | Mix de venda | 80% B2B (restaurantes) / 20% B2C (feiras) |

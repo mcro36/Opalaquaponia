@@ -49,14 +49,34 @@ Para garantir a autolimpeza eficiente em tanques de 7,4m de diâmetro, o projeto
 ### Limpeza por Gravidade
 - O desnível de 2,5m entre os patamares do terreno permite que a descarga do dreno central dos tanques superiores escoe por gravidade para um decantador no nível inferior.
 
-## 7º Tanque — Depuração Dedicada
+## 7º Tanque — Depuração + Buffer Térmico
 
-A despesca de ~1.913 kg vivos é realizada em **3 lotes por mês** (~638 kg/lote, ~750 peixes). Para não imobilizar um dos 6 tanques de produção durante a purga (3–5 dias), o projeto inclui um **tanque de depuração dedicado de 15m³**.
+A despesca de ~1.913 kg vivos é realizada em **3 lotes por mês** (~638 kg/lote, ~750 peixes). Para não imobilizar um dos 6 tanques de produção durante a purga (3–5 dias), o projeto inclui um **7º tanque do mesmo padrão dos demais (60m³, Ø 7,40m)**, que cumpre função dupla:
 
-- **Especificação:** Tanque circular de geomembrana Ø 4,5m × 0,95m lâmina útil. Suporte com estacas de eucalipto tratado (estrutura simplificada).
-- **Operação:** Cada lote fica em jejum com fluxo contínuo de água limpa por 3–5 dias antes do abate. Teste sensorial (cozinhar amostra e avaliar sabor/odor) antes da liberação. Os 3 lotes são processados sequencialmente ao longo do mês.
+### Função 1 — Depuração
+- Cada lote fica em jejum com fluxo contínuo de água pré-aquecida por 3–5 dias antes do abate.
+- Teste sensorial antes da liberação: cozinhar uma amostra e avaliar sabor/odor.
+- 60m³ = espaço confortável para ~750 peixes → menor estresse → depuração mais eficiente.
+
+### Função 2 — Buffer Térmico (Pré-Aquecedor da Água de Reposição)
+
+A água do poço artesiano chega a ~18°C no inverno. Se inserida diretamente nos tanques de produção, geraria pico de carga térmica de +8,7 kW sobre a bomba de calor (exigiria bomba de 100k BTU/h). O 7º tanque elimina esse problema:
+
+- **Toda a água de reposição nova (poço) entra exclusivamente no 7º tanque.**
+- Cada renovação de 3 m³ reduz a temperatura do 7º tanque em apenas **~0,5°C** (3/60 × ΔT 10°C) — sem pico de demanda.
+- A bomba de calor compensa esse delta gradualmente ao longo de horas.
+- Os tanques de produção 1–6 recebem apenas água já aquecida, saída do 7º tanque. Nunca há choque térmico.
+
+**Modo de operação do 7º tanque:**
+| Período | Temperatura Alvo | Finalidade |
+| :--- | :---: | :--- |
+| Fora da depuração (25 dias/mês) | 22–24°C | Pré-aquecedor — minimiza carga na bomba |
+| Durante depuração (3–5 dias/mês) | 28°C | Condição ideal para purga de geosmina |
+
+Com este design, a bomba de calor de **80.000 BTU/h (COP ≥ 5)** é suficiente — os tanques de produção só enfrentam a carga estrutural (16,2 kW), dentro da capacidade nominal de 23 kW.
+
 - **Aeração:** Derivação da rede mestra existente (Ring Main) — sem custo de soprador adicional.
-- **Dreno:** Simples (sem Dual-Drain), pois a finalidade é holding de curto prazo, não autolimpeza.
+- **Dreno:** Cornell Dual-Drain completo, mesmo padrão dos 6 tanques de produção (facilita construção e manutenção uniformes).
 
 ## Sala de Processamento (Adequação SIE-MG)
 
@@ -101,11 +121,11 @@ Os equipamentos são instalados na Fase 1 para que o processamento integral este
 | Ferramentas de manejo (redes, balanças, kits teste) | 1 | 1.500 |
 | **Subtotal Infraestrutura** | | **R$ 85.000** |
 
-### 7º Tanque — Depuração
+### 7º Tanque — Depuração + Buffer Térmico
 | Item | Qtd | Valor (R$) |
 | :--- | :---: | :--- |
-| Tanque geomembrana 15m³ (Ø 4,5m) c/ estacas eucalipto | 1 | 6.000 |
-| **Subtotal Depuração** | | **R$ 6.000** |
+| Tanque geomembrana 60m³ (Ø 7,40m) c/ estrutura metálica — mesmo padrão Tanques 1–6 | 1 | 8.000 |
+| **Subtotal 7º Tanque** | | **R$ 8.000** |
 
 ### Sala de Processamento — Adequação SIE
 | Item | Qtd | Valor (R$) |
@@ -131,4 +151,4 @@ Os equipamentos são instalados na Fase 1 para que o processamento integral este
 
 | | |
 | :--- | :--- |
-| **TOTAL FASE 1** | **R$ 118.000** |
+| **TOTAL FASE 1** | **R$ 120.000** |

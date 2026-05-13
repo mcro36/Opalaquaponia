@@ -26,15 +26,15 @@ Documento mestre com todas as métricas financeiras do projeto: CAPEX por fase (
 
 | Fase | Descrição | Valor (R$) |
 | :---: | :--- | :--- |
-| 1 | Infraestrutura, Aeração, Tanque Depuração, Processamento SIE e Linguiça/Defumação | 118.000 |
+| 1 | Infraestrutura, Aeração, 7º Tanque (60m³ buffer), Processamento SIE e Linguiça/Defumação | 120.000 |
 | 2 | Automação e Segurança (CLP, sensores OD, inversores, gerador) | 47.800 |
-| 3 | Climatização e Alimentação (Bomba de Calor 100k BTU, isolamento) | 54.100 |
+| 3 | Climatização e Alimentação (Bomba de Calor 80k BTU, isolamento) | 49.100 |
 | 4 | Fábrica de Ração + Graxaria (c/ controle de odor) | 107.600 |
 | 5 | Energia Solar (sistema 26 kWp bifacial completo) | 112.200 |
 | | Licenciamento (COPAM, IGAM, SIE, MAPA) | 10.000 |
-| **TOTAL** | | **R$ 449.700** |
+| **TOTAL** | | **R$ 446.700** |
 
-*Fase 1: inclui tanque depuração 15m³ (R$ 6.000), sala processamento SIE (R$ 10.000) e equipamentos de linguiça + defumador (R$ 17.000). Fase 4: Fábrica Ração R$ 62.600 + Graxaria R$ 45.000 (inclui condensador de vapores + filtro de carvão ativado para controle de odor). Fase 5 redimensionada para 26 kWp cobrindo inclusive cargas da fábrica de ração e graxaria.*
+*Fase 1: inclui 7º tanque 60m³ dual-use — depuração + buffer térmico (R$ 8.000), sala processamento SIE (R$ 10.000) e equipamentos de linguiça + defumador (R$ 17.000). Fase 3: bomba de calor revertida para 80k BTU/h pois o 7º tanque elimina picos de carga hídrica nos tanques de produção (economia R$ 5.000 vs 100k BTU). Fase 4: Fábrica Ração R$ 62.600 + Graxaria R$ 45.000. Fase 5 redimensionada para 26 kWp cobrindo cargas da fábrica de ração e graxaria.*
 
 ---
 
@@ -96,11 +96,11 @@ Nos primeiros 6 meses, os tanques estão sendo ativados e nenhum lote atingiu pe
 
 | Cenário | CAPEX Total | Capital Giro | Investimento Total | Lucro Mensal | Payback |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Operação Básica (Fases 1–3, com linguiça) | R$ 219.900 | R$ 90.000 | R$ 309.900 | R$ 9.463 | **33 meses (2,7 anos)** |
-| Operação Completa (Fases 1–5, sem linguiça/graxaria) | R$ 449.700 | R$ 90.000 | R$ 539.700 | R$ 16.266 | **33 meses (2,8 anos)** |
-| **Operação Completa + Linguiça + Graxaria** | **R$ 449.700** | **R$ 90.000** | **R$ 539.700** | **R$ 19.510** | **28 meses (2,3 anos)** |
+| Operação Básica (Fases 1–3, com linguiça) | R$ 216.900 | R$ 90.000 | R$ 306.900 | R$ 9.463 | **32 meses (2,7 anos)** |
+| Operação Completa (Fases 1–5, sem linguiça/graxaria) | R$ 446.700 | R$ 90.000 | R$ 536.700 | R$ 16.266 | **33 meses (2,8 anos)** |
+| **Operação Completa + Linguiça + Graxaria** | **R$ 446.700** | **R$ 90.000** | **R$ 536.700** | **R$ 19.510** | **27 meses (2,3 anos)** |
 
-*CAPEX das Fases 1-3 (R$ 219.900) = Fase 1 R$ 118.000 + Fase 2 R$ 47.800 + Fase 3 R$ 54.100.*
+*CAPEX das Fases 1-3 (R$ 216.900) = Fase 1 R$ 120.000 + Fase 2 R$ 47.800 + Fase 3 R$ 49.100.*
 *Nota: Fase 5 (Solar) pode ser financiada via PRONAF Eco, onde a parcela mensal aproxima-se da economia gerada na conta de luz.*
 
 ---
@@ -109,7 +109,7 @@ Nos primeiros 6 meses, os tanques estão sendo ativados e nenhum lote atingiu pe
 
 | Métrica | Valor |
 | :--- | :--- |
-| Investimento Total (Fase 1–5 + Giro) | R$ 539.700 |
+| Investimento Total (Fase 1–5 + Giro) | R$ 536.700 |
 | Faturamento Mensal (filé + linguiça + farinha excedente) | R$ 32.557 |
 | Faturamento Anual | R$ 390.684 |
 | OPEX Mensal (ração própria + solar + graxaria + linguiça) | R$ 13.047 |
@@ -135,9 +135,9 @@ O lucro operacional acima não considera depreciação do imobilizado nem encarg
 
 | Item | Cálculo | Impacto Mensal (R$) |
 | :--- | :--- | :---: |
-| Depreciação (CAPEX R$ 449.700 / 10 anos) | R$ 44.970/ano | −R$ 3.748 |
+| Depreciação (CAPEX R$ 446.700 / 10 anos) | R$ 44.670/ano | −R$ 3.722 |
 | FUNRURAL (2,1% sobre receita bruta rural) | R$ 32.557 × 2,1% | −R$ 684 |
-| **Lucro Econômico Ajustado** | | **~R$ 15.078/mês** |
+| **Lucro Econômico Ajustado** | | **~R$ 15.104/mês** |
 
 *FUNRURAL substitui o INSS patronal para produtores rurais. Produtores registrados como pessoa jurídica podem ter alíquotas distintas — consultar contador antes do início das operações. A depreciação não é desembolso de caixa; o payback usa o lucro operacional, não o econômico.*
 

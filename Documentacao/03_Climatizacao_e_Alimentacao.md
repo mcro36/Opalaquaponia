@@ -1,7 +1,7 @@
 # 03. Climatização e Alimentação (Fase 3)
 
 ## Resumo
-Instalação da Bomba de Calor Industrial dimensionada para manter a água a 28°C durante o inverno de BH (mínimas de 11°C), com isolamento térmico de lã de rocha nas paredes e bolas flutuantes pretas na superfície. Alimentação automatizada por timers.
+Instalação da Bomba de Calor Industrial (80.000 BTU/h, COP ≥ 5) para manter a água a 28°C durante o inverno de BH (mínimas de 11°C), com isolamento de lã de rocha, bolas flutuantes pretas e **7º tanque como buffer térmico** — eliminando picos de carga da água de reposição e mantendo a especificação original da bomba. Alimentação automatizada por timers.
 
 ## Perfil Climático — Belo Horizonte, MG
 
@@ -39,37 +39,43 @@ Sem aquecimento, a produção fica inviável por 3-4 meses/ano (Mai-Ago). A Bomb
 
 ## Dimensionamento da Bomba de Calor
 
-### Carga Térmica Total (6 tanques, pior caso — Julho)
+### Carga Térmica Total — Solução com 7º Tanque como Buffer
+
+O projeto inclui um **7º tanque (60m³) que atua como buffer térmico**: toda a água fria do poço artesiano (~18°C no inverno) entra exclusivamente nele, nunca diretamente nos tanques de produção. Essa decisão redesenha o perfil de carga:
+
+#### Tanques de Produção T1–T6 (apenas carga estrutural)
 
 | Componente | Perda/tanque (W) | Perda 6 tanques (kW) |
 | :--- | :---: | :---: |
 | Lateral (com Lã de Rocha 50mm) | 257 | 1,5 |
 | Superfície (com Bolas Flutuantes) | 2.150 | 12,9 |
 | Fundo (contato com solo, ΔT menor) | 300 | 1,8 |
-| **Subtotal estrutural** | **2.707** | **16,2 kW** |
+| **Subtotal T1–T6** | **2.707** | **16,2 kW** |
 
-### Carga Térmica da Água de Reposição
+*T1–T6 recebem apenas água já pré-aquecida saída do 7º tanque — sem picos de carga hídrica.*
 
-A renovação parcial dos tanques (5–10% do volume/dia) e o abate/filetagem introduzem água fria do poço artesiano (~18°C no inverno). Esta carga não estava no cálculo original e deve ser incluída.
+#### 7º Tanque (buffer a 22–24°C entre ciclos de depuração)
 
-- **Renovação diária estimada:** 5% × 360m³ = 18 m³/dia
-- **ΔT:** 28°C − 18°C = 10°C
-- **Potência necessária:** 18.000 L × 4.186 J/kg·°C × 10°C / 86.400s = **8,7 kW**
-- **Observação:** A água de poço artesiano tende a ser mais constante (15–20°C o ano todo), atenuando o pico de verão mas mantendo carga relevante no inverno.
+O 7º tanque é mantido a 22–24°C entre as purgas (pré-aquecedor). Sua carga estrutural é menor (ΔT ~5°C) e a água de reposição entra com ΔT gradual de 4°C (18°C → 22°C), suavizado pelos 60m³ de massa térmica:
+
+- **Estrutural 7º tanque (ΔT ~5°C):** ~1,5 kW
+- **Reposição hídrica (18 m³/dia, ΔT 4°C, gradual):** ~3,5 kW médio
+  *(cada renovação de 3 m³ baixa a temperatura do 7º tanque em apenas ~0,4°C)*
 
 | Componente | Carga (kW) |
 | :--- | :---: |
-| Perdas estruturais (6 tanques, julho) | 16,2 |
-| Aquecimento água de reposição (18 m³/dia, ΔT 10°C) | 8,7 |
-| **TOTAL PIOR CASO** | **24,9 kW** |
+| Estrutural T1–T6 (julho) | 16,2 |
+| 7º tanque estrutural (22°C) | 1,5 |
+| Aquecimento água de reposição (ΔT 4°C, gradual) | 3,5 |
+| **TOTAL MÉDIO PIOR CASO** | **21,2 kW** |
+
+*Durante os 3–5 dias de depuração (7º tanque a 28°C): carga sobe ~1 kW. A inércia dos 60m³ absorve o delta sem pico brusco.*
 
 ### Especificação
-- **Potência térmica total (pior caso):** ~25 kW (85.000 BTU/h)
-- **Com margem de segurança (+15%):** ~28,8 kW (**98.000 BTU/h**)
-- **Equipamento recomendado:** Bomba de Calor Inverter de **100.000 BTU/h** (COP ≥ 5,0)
-- **Consumo elétrico médio (COP 5):** 4,0 a 5,0 kW elétrico
-
-*Nota: A carga de reposição hídrica concentra-se nos momentos de renovação — a bomba de calor Inverter adapta a potência continuamente, cobrindo os picos sem operar a 100% o tempo todo.*
+- **Potência térmica (pior caso):** ~21 kW (72.000 BTU/h)
+- **Com margem de segurança (+15%):** ~24 kW (**82.000 BTU/h**)
+- **Equipamento recomendado:** Bomba de Calor Inverter de **80.000 a 100.000 BTU/h** (COP ≥ 5,0) — viabilizada pelo buffer do 7º tanque
+- **Consumo elétrico médio (COP 5):** 3,2 a 4,0 kW elétrico
 
 ### Custo Operacional Mensal (Tarifa CEMIG R$ 0,85/kWh)
 
@@ -97,16 +103,16 @@ A renovação parcial dos tanques (5–10% do volume/dia) e o abate/filetagem in
 
 ## Riscos e Limitações
 - **Bomba de Calor como único agente térmico:** Sem estufa ou lonas, a carga térmica recai 100% sobre a bomba. Se ela falhar no inverno, a temperatura cai progressivamente (não imediatamente — a massa d'água de 360m³ tem inércia). Recomendação: manter contrato de assistência técnica com prazo de atendimento ≤ 24h. O isolamento e as bolas flutuantes ganham tempo para o reparo.
-- **Carga de reposição hídrica:** A água fria do poço artesiano (~18°C) representa quase 35% da carga térmica total no pior caso. Minimizar renovações desnecessárias durante ondas de frio reduz o consumo da bomba.
+- **Carga de reposição hídrica:** Gerenciada pelo 7º tanque buffer. Minimizar renovações desnecessárias durante ondas de frio reduz adicionalmente o consumo da bomba.
 - **Bolas flutuantes x manejo:** As bolas precisam ser afastadas durante a alimentação e biometrias. Redes divisórias flutuantes afastadas para um lado facilitam o acesso sem precisar remover as bolas individualmente.
 
 ## Custos Estimados — Fase 3
 
 | Item | Qtd | Valor (R$) |
 | :--- | :---: | :--- |
-| Bomba de Calor Inverter (80-100k BTU) | 1 | 30.000 |
+| Bomba de Calor Inverter (80k BTU, COP ≥ 5,0) | 1 | 25.000 |
 | Isolamento lã de rocha 50mm (6 tanques) | 6 | 5.400 |
 | Bolas flutuantes pretas (6 tanques, ~43m² cada) | 6 | 4.200 |
 | Alimentadores automáticos (vibratório/rosca) | 6 | 10.500 |
 | Tubulações térmicas (CPVC) e instalação | 1 | 4.000 |
-| **TOTAL FASE 3** | | **R$ 54.100** |
+| **TOTAL FASE 3** | | **R$ 49.100** |
