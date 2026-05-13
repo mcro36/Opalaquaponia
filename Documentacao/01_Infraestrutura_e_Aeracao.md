@@ -54,8 +54,23 @@ Para garantir a autolimpeza eficiente em tanques de 7,4m de diâmetro, o projeto
 - **Fundo cônico:** A inclinação mínima de 5% é essencial. Sem ela, os sólidos não migram para o dreno central e a qualidade da água degrada.
 - **Terraplenagem:** Tanques de 60m³ pesam 60 toneladas. Em terreno inclinado, a compactação mecanizada do solo de base é obrigatória para evitar recalque diferencial.
 
+## Processamento — Linguiça de Tilápia
+
+A produção de linguiça começa na **primeira despesca (mês 7)**, junto com a filetagem. Os equipamentos são instalados na Fase 1 para que o processamento integral já esteja operacional desde o início do faturamento. Ver dimensionamento completo em [Doc 08 — Canais de Venda e Produtos](08_Canais_de_Venda_e_Produtos.md).
+
+| Item | Qtd | Valor (R$) |
+| :--- | :---: | :--- |
+| Moedor industrial de carne | 1 | 4.000 |
+| Embutideira industrial | 1 | 4.500 |
+| Seladora a vácuo | 1 | 2.500 |
+| Freezer horizontal adicional (200 L) | 1 | 2.000 |
+| **Subtotal Linguiça** | | **R$ 13.000** |
+
+---
+
 ## Custos Estimados — Fase 1
 
+### Infraestrutura e Aeração
 | Item | Qtd | Valor (R$) |
 | :--- | :---: | :--- |
 | Tanques geomembrana (60m³) c/ estrutura metálica | 6 | 48.000 |
@@ -66,4 +81,17 @@ Para garantir a autolimpeza eficiente em tanques de 7,4m de diâmetro, o projeto
 | Elétrica básica (quadro, cabos, disjuntores) | 1 | 3.500 |
 | Primeiro lote de alevinos (genética GenoMar/Supreme) | 1 | 2.500 |
 | Ferramentas de manejo (redes, balanças, kits teste) | 1 | 1.500 |
-| **TOTAL FASE 1** | | **R$ 85.000** |
+| **Subtotal Infraestrutura** | | **R$ 85.000** |
+
+### Processamento — Linguiça
+| Item | Qtd | Valor (R$) |
+| :--- | :---: | :--- |
+| Moedor industrial de carne | 1 | 4.000 |
+| Embutideira industrial | 1 | 4.500 |
+| Seladora a vácuo | 1 | 2.500 |
+| Freezer horizontal adicional (200 L) | 1 | 2.000 |
+| **Subtotal Linguiça** | | **R$ 13.000** |
+
+| | |
+| :--- | :--- |
+| **TOTAL FASE 1** | **R$ 98.000** |
