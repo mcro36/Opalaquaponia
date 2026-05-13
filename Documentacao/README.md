@@ -6,11 +6,13 @@ Sistema de produção intensiva de tilápia em 6 tanques de 60m³ (geomembrana) 
 | Métrica | Valor |
 | :--- | :--- |
 | Capacidade total | 360m³ (6 × 60m³) |
-| Faturamento mensal | R$ 28.395 |
+| Faturamento mensal (filé + linguiça + graxaria) | R$ 32.557 |
 | CAPEX Base (Fases 1-3) | R$ 195.900 |
-| CAPEX Completo (Fases 1-5) | R$ 349.700 |
-| Lucro mensal (ração própria + solar) | R$ 15.834 |
-| Payback (cenário completo) | 2,3 anos |
+| CAPEX Completo (Fases 1-5) | R$ 407.700 |
+| Lucro mensal (operação completa + linguiça + graxaria) | R$ 19.078 |
+| Margem operacional | 58,6% |
+| Payback (cenário completo) | 2,1 anos |
+| Mix de venda | 80% B2B (restaurantes) / 20% B2C (feiras) |
 
 ## Documentação Técnica
 
@@ -19,10 +21,11 @@ Sistema de produção intensiva de tilápia em 6 tanques de 60m³ (geomembrana) 
 | 01 | [Infraestrutura e Aeração](01_Infraestrutura_e_Aeracao.md) | 1 | Tanques, Airlifts, Dual Drain Cornell |
 | 02 | [Automação e Segurança](02_Automacao_e_Seguranca.md) | 2 | Sensores OD multiplexados, inversores, gerador |
 | 03 | [Climatização e Alimentação](03_Climatizacao_e_Alimentacao.md) | 3 | Bomba de Calor, lã de rocha, bolas flutuantes |
-| 04 | [Fábrica de Ração](04_Fabrica_de_Racao.md) | 4 | Extrusora, formulação, silagem em IBC |
+| 04 | [Fábrica de Ração + Graxaria + Linguiça](04_Fabrica_de_Racao.md) | 4 | Extrusora, formulação, graxaria (farinha+óleo), linguiça de tilápia |
 | 05 | [Energia Solar](05_Energia_Solar.md) | 5 | Sistema 21 kWp, Fio B, dimensionamento |
 | 06 | [Qualidade, Riscos e Licenciamento](06_Qualidade_Riscos_e_Licenciamento.md) | — | Depuração, riscos, licenças MG (COPAM/IGAM/IMA) |
 | 07 | [Plano Financeiro](07_Plano_Financeiro.md) | — | CAPEX, OPEX, capital de giro, fluxo de caixa |
+| 08 | [Canais de Venda e Produtos](08_Canais_de_Venda_e_Produtos.md) | — | Mix B2B/B2C, linguiça de tilápia, faturamento revisado |
 
 ## Software
 - [Plano de Evolução do Simulador](PLANO_EVOLUCAO_SIMULADOR.md) — Regras de negócio para a aplicação React/Next.js.
