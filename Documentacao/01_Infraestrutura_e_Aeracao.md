@@ -9,7 +9,7 @@ Os peixes **permanecem no mesmo tanque** durante todo o ciclo de 6 meses. Não h
 1. Mês 1: T1 recebe alevinos.
 2. Mês 2: T2 recebe alevinos. T1 continua crescendo.
 3. Meses 3-6: Os demais tanques são ativados sequencialmente.
-4. Mês 7: T1 atinge peso de despesca (~800g). Peixes são transferidos ao **tanque de depuração** (purga 3-5 dias). T1 é limpo e repovoado com alevinos.
+4. Mês 7: T1 atinge peso de despesca (~850g). Peixes são transferidos ao **tanque de depuração** (purga 3-5 dias). T1 é limpo e repovoado com alevinos.
 5. Mês 8: T2 é despescado. E assim por diante — **uma despesca por mês**.
 
 ## Dimensionamento de Biomassa (Regime Estável)
