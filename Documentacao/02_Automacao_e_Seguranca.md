@@ -135,6 +135,81 @@ Para operações que exijam rastreabilidade regulatória de NH₄⁺ (exportaç�
 
 ---
 
+## Pontos de Melhoria — Revisão Técnica (a tratar)
+
+Os itens abaixo foram identificados em revisão e devem ser incorporados antes da instalação ou na primeira iteração de projeto executivo.
+
+### Correções obrigatórias (impacto direto na confiabilidade)
+
+1. **Sensor de fluxo binário na câmara de medição** (~R$ 200)
+   - Sem ele, falha silenciosa de bomba ou válvula entupida gera leituras congeladas interpretadas como normais pelo CLP.
+
+2. **UPS 600 VA para a eletrônica de controle** (~R$ 500)
+   - Gerador aciona em <15 s, mas CLP, sensores e modem caem nesse intervalo. O UPS cobre a transição.
+
+3. **Isolação galvânica RS485 + DPS (proteção contra surtos)** (~R$ 800)
+   - Sopradores 2 CV no mesmo barramento elétrico = ambiente ruidoso. Isoladores galvânicos nos extremos do RS485 e supressor de surto no painel são essenciais; sem eles há ~30% de chance de interferência crônica.
+
+4. **Bomba peristáltica reserva no painel** (~R$ 200)
+   - Vida útil de 2.000–5.000 h. Falha total paralisa todo o monitoramento. Custo trivial vs. risco.
+
+### Lacunas de arquitetura (resolver no projeto executivo)
+
+5. **Conflito entre ciclos rápido e lento no manifold**
+   - O documento implica dois ciclos simultâneos, mas com manifold único e bombas compartilhadas isso é fisicamente impossível.
+   - Solução A: **2 manifolds independentes** — ciclo OD completamente separado do ciclo lento (+R$ 1.500).
+   - Solução B: **Intercalação na sequência** — aumenta ciclo rápido do OD para ~25–30 min (reduz margem de segurança).
+   - Decisão pendente antes da compra do manifold.
+
+6. **Tempo de purga das linhas entre tanques não contabilizado**
+   - ~30–60 s de purga por troca de tanque → ciclo OD real: ~18–22 min (não 14 min).
+   - Revisar orçamento de tempo e ajustar lógica do CLP.
+
+7. **Datalogging e dashboard histórico**
+   - CLPs típicos têm <1 MB de memória — insuficiente para meses de log.
+   - Avaliar: Raspberry Pi 4 + InfluxDB + Grafana local (~R$ 800) ou módulo IoT do CLP enviando para ThingsBoard (gratuito).
+
+8. **Meio de alerta celular não especificado**
+   - Recomendação: Telegram bot como primário + modem GSM com chip de operadora como fallback (~R$ 300) para casos de queda de internet.
+
+### Melhorias de qualidade (desejáveis)
+
+9. **Protocolo de calibração periódica**
+   - pH: tampões 4 e 7 mensalmente (~R$ 80/ano).
+   - DOF-2000 OD: zero (Na₂SO₃) + ar saturado trimestralmente.
+   - NH4N-2000: padrão 1 mg/L NH₄Cl trimestralmente.
+
+10. **Sanitização automática do manifold**
+    - Biofilme em ~10 m de tubulação PVC inviabiliza leituras em ~3 meses.
+    - Flush mensal com hipoclorito 50 ppm via válvula adicional controlada pelo CLP (~R$ 150).
+
+11. **Cross-check de OD via MS-400**
+    - A MS-400 também mede OD. Usar essa leitura no ciclo lento como verificação cruzada das DOF-2000 (detecção de deriva).
+
+12. **Mão de obra subestimada**
+    - R$ 4.500 é baixo para 40–50 h de instalação + programação Modbus + lógica fotoperíodo + comissionamento IHM.
+    - Valor realista: R$ 7.000–9.000 (ou contratar integrador certificado WEG/Altus).
+
+13. **Definir escopo do 7º tanque (buffer/depuração)**
+    - Doc 01 tem 6 tanques produtivos + 1 buffer. Confirmar se o tanque buffer entra no manifold (7 válvulas) ou fica com monitoramento manual.
+
+### Impacto no CAPEX
+
+| Item | Valor (R$) |
+| :--- | ---: |
+| 2º manifold dedicado ao ciclo OD (solução A) | 1.500 |
+| Sensor de fluxo binário | 200 |
+| UPS 600 VA | 500 |
+| Isolador galvânico RS485 + DPS | 800 |
+| Raspberry Pi 4 + storage (datalogging) | 800 |
+| Modem GSM fallback SMS | 300 |
+| Bomba peristáltica reserva | 200 |
+| Revisão mão de obra (+R$ 2.500–4.500) | 3.500 |
+| **Total adicional estimado** | **+R$ 7.800** |
+| **Fase 2 revisada (teto)** | **~R$ 48.850** |
+
+---
+
 ## Custos Estimados — Fase 2
 
 | Item | Qtd | Valor (R$) |
