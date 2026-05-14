@@ -20,12 +20,19 @@ export function DRETable({ data }: DRETableProps) {
   };
 
   const rows = [
-    { label: '(+) Receita Bruta', value: data.receita_bruta, margin: 100, isMain: true },
-    { label: '(–) PIS/COFINS', value: data.pis_cofins, margin: 0 },
+    { 
+      label: '(+) Receita Filés', 
+      value: data.receita_bruta - (data.receita_agregados || 0), 
+      margin: ((data.receita_bruta - (data.receita_agregados || 0)) / data.receita_liquida) * 100 || 0, 
+      indent: true 
+    },
+    ...(data.receita_agregados ? [{ label: '(+) Receita Agregados (Linguiças)', value: data.receita_agregados, margin: (data.receita_agregados / data.receita_liquida) * 100 || 0, indent: true }] : []),
+    { label: '(–) PIS/COFINS', value: data.pis_cofins, margin: (data.pis_cofins / data.receita_liquida) * 100 || 0 },
     { label: '(=) Receita Líquida', value: data.receita_liquida, margin: 100, isSubtotal: true },
     { label: '(–) CPV — Ração', value: data.cpv_racao, margin: (data.cpv_racao / data.receita_liquida) * 100 || 0, indent: true },
     { label: '(–) CPV — Alevinos', value: data.cpv_alevinos, margin: (data.cpv_alevinos / data.receita_liquida) * 100 || 0, indent: true },
-    { label: '(–) CPV — Processamento', value: data.cpv_processamento, margin: (data.cpv_processamento / data.receita_liquida) * 100 || 0, indent: true },
+    { label: '(–) CPV — Processamento/Filé', value: data.cpv_processamento, margin: (data.cpv_processamento / data.receita_liquida) * 100 || 0, indent: true },
+    ...(data.cpv_agregados ? [{ label: '(–) CPV — Insumos Agregados', value: data.cpv_agregados, margin: (data.cpv_agregados / data.receita_liquida) * 100 || 0, indent: true }] : []),
     { label: '(=) Lucro Bruto', value: data.lucro_bruto, margin: (data.lucro_bruto / data.receita_liquida) * 100 || 0, isSubtotal: true },
     { label: '(–) SG&A — Energia', value: data.sga_energia, margin: (data.sga_energia / data.receita_liquida) * 100 || 0, indent: true },
     { label: '(–) SG&A — Manutenção', value: data.sga_manutencao, margin: (data.sga_manutencao / data.receita_liquida) * 100 || 0, indent: true },

@@ -11,9 +11,9 @@ A demanda inclui cargas contínuas (24h/dia) e cargas intermitentes da fábrica 
 | Equipamento | Potência Média (kW) | Horas/dia | kWh/mês |
 | :--- | :---: | :---: | :---: |
 | Sopradores (2 × 2CV, com inverter) | 1,8 | 24 | 1.296 |
-| Bomba de Calor (média anual) | 1,4 | 24 | 997 |
+| Bomba de Calor Inverter 48k BTU (média anual) | 0,63 | 24 | 456 |
 | CLP, sensores, alimentadores | 0,28 | 24 | 200 |
-| **Subtotal contínuo** | **3,48** | | **2.493 kWh/mês** |
+| **Subtotal contínuo** | **2,71** | | **1.952 kWh/mês** |
 
 ### Cargas Intermitentes (Fases 4 em diante)
 | Equipamento | Potência (kW) | Horas/mês | kWh/mês |
@@ -28,8 +28,8 @@ A demanda inclui cargas contínuas (24h/dia) e cargas intermitentes da fábrica 
 
 | | kWh/mês |
 |:---|:---:|
-| **TOTAL DEMANDA** | **3.001 kWh/mês** |
-| Custo estimado na tarifa CEMIG (R$ 0,85/kWh) | ~**R$ 2.551/mês** |
+| **TOTAL DEMANDA** | **2.460 kWh/mês** |
+| Custo estimado na tarifa CEMIG (R$ 0,85/kWh) | ~**R$ 2.091/mês** |
 
 ---
 
@@ -51,9 +51,9 @@ A demanda inclui cargas contínuas (24h/dia) e cargas intermitentes da fábrica 
 
 Belo Horizonte possui excelente irradiação solar, com média de **5,0 HSP/dia** ao longo do ano.
 
-- **Consumo alvo:** 3.001 kWh/mês
+- **Consumo alvo:** 2.460 kWh/mês
 - **Fator de perdas do sistema:** 20% (rendimento de 80%)
-- **Cálculo da Potência:** `3.001 / (5,0 × 30 × 0,80) = 25,0 kWp`
+- **Cálculo da Potência:** `2.460 / (5,0 × 30 × 0,80) = 20,5 kWp`
 
 ### Especificação Recomendada
 - **Potência instalada:** 26 kWp
@@ -61,7 +61,7 @@ Belo Horizonte possui excelente irradiação solar, com média de **5,0 HSP/dia*
 - **Inversor:** 1 inversor string de 25 kW.
 - **Área necessária:** ~130 m²
 
-**Economia de espaço vs. especificação anterior:** Usando painéis bifaciais de 650W em vez de 550W, o sistema de 26 kWp utiliza apenas 40 módulos — mesmo número que 22 kWp com painéis de 550W. A área por kWp reduz de 2,9 para **2,5 m²/kWp**.
+**Nota sobre superdimensionamento:** O cálculo mínimo aponta 20,5 kWp; o sistema de 26 kWp instalado representa ~27% de margem acima da necessidade atual. Essa folga é intencional e cobre: (a) geração reduzida em dias nublados e meses de inverno; (b) degradação natural dos painéis (~0,5%/ano); (c) ampliação futura da capacidade produtiva sem necessidade de novo investimento em geração. Usando painéis bifaciais de 650W, a área por kWp reduz de 2,9 para **2,5 m²/kWp** — apenas ~130 m² para todo o sistema.
 
 ---
 
@@ -72,7 +72,7 @@ Como o projeto consome energia 24h por dia e o sol gera apenas durante o dia (~1
 A energia injetada está sujeita à cobrança do **Fio B**:
 - **Cenário atual (2026):** O produtor paga 60% do valor do Fio B sobre a energia compensada.
 - O crédito gerado na rede CEMIG vale ~75% da tarifa cheia.
-- A economia efetiva supera **85%**. A conta cairá de ~R$ 2.551 para apenas a **taxa mínima de disponibilidade + iluminação pública** (estimada em ~R$ 290/mês para tarifa rural trifásica).
+- A economia efetiva supera **85%**. A conta cairá de ~R$ 2.091 para apenas a **taxa mínima de disponibilidade + iluminação pública** (estimada em ~R$ 290/mês para tarifa rural trifásica).
 
 ### Atenção — Homologação CEMIG para Sistemas > 10 kWp
 Sistemas acima de 10 kWp em baixa tensão podem exigir **Estudo de Impacto na Rede (EPIN)** pela CEMIG antes da aprovação. Providenciar com antecedência de **3–9 meses** antes da instalação. O projeto de engenharia e ART já estão incluídos no CAPEX para cobrir essa etapa.
@@ -80,14 +80,14 @@ Sistemas acima de 10 kWp em baixa tensão podem exigir **Estudo de Impacto na Re
 ---
 
 ## Benefício Financeiro
-- **Custo atual (com Fases 1–4):** ~R$ 2.551/mês
-- **Custo com solar:** ~R$ 290/mês (taxa mínima)
-- **Economia mensal:** **R$ 2.261/mês**
-- **Economia anual:** **R$ 27.132/ano**
-- **Payback da usina solar:** ~4,4 anos.
+- **Conta de luz atual (com Fases 1–4, todos os equipamentos):** ~R$ 2.091/mês
+- **Conta com solar:** ~R$ 290/mês (taxa mínima de disponibilidade)
+- **Economia mensal:** **~R$ 1.801/mês**
+- **Economia anual:** **~R$ 21.612/ano**
+- **Payback da usina solar:** ~5,2 anos.
 - **Vida útil dos painéis:** 25 anos.
 
-*Obs: A economia maior vs. especificação anterior (R$ 2.261 vs. R$ 1.830) reflete a inclusão das cargas da fábrica de ração e graxaria que não estavam no cálculo original.*
+*Nota sobre o modelo financeiro (Doc 07): O plano financeiro conservadoramente mantém o custo da ração em R$ 2,10/kg mesmo após a instalação solar — esse valor inclui energia embutida da fábrica (~R$ 432/mês). Na prática, a conta de luz real cai de R$ 2.091 para R$ 290. No modelo contábil do Doc 07, apenas a economia da linha de energia explícita do OPEX (~R$ 1.658 → R$ 290 = R$ 1.368/mês) é contabilizada no lucro, para evitar dupla contagem com o custo da ração. O benefício total real é R$ 1.801/mês.*
 
 ---
 

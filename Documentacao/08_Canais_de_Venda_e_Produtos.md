@@ -1,7 +1,7 @@
 # 08. Canais de Venda e Produtos
 
 ## Resumo
-Estratégia comercial com mix de **80% B2B** (restaurantes) e **20% B2C** (feiras/mercados). Portfólio de três produtos: filé depurado premium, linguiça fresca e linguiça defumada artesanal de tilápia. A linguiça aproveita a barriguinha — subproduto limitante — e os recortes da filetagem, gerando receita incremental de ~R$ 7.000/mês sem aumentar a produção de peixes.
+Estratégia comercial com mix de **80% B2B** (restaurantes) e **20% B2C** (feiras/mercados). Portfólio de três produtos: filé depurado premium, linguiça fresca e linguiça defumada artesanal de tilápia. A linguiça aproveita a barriguinha — subproduto limitante — e os recortes da filetagem, gerando receita incremental de ~R$ 8.524/mês sem aumentar a produção de peixes. Biomassa de despesca de 2.200 kg vivo/mês com sistema de fotoperíodo 18L:6D (+15% vs produção sem controle de luz).
 
 ---
 
@@ -46,17 +46,17 @@ A **barriguinha** (belly flap — retirada durante a filetagem) representa ~5% d
 
 **Embalagem:** Ambos os tipos em embalagem a vácuo simples e econômica (seladora já incluída no CAPEX Fase 1). Rótulo básico com identificação do produto, SIE-MG, data de validade e peso.
 
-### 2.3 Dimensionamento do Processamento por Despesca (1.913 kg vivo)
+### 2.3 Dimensionamento do Processamento por Despesca (2.200 kg vivo — com 18L:6D)
 
-O resíduo de 67% (anteriormente tratado como bloco único) é agora subdividido:
+A biomassa de despesca de 2.200 kg/mês reflete o ganho de +15% do sistema de fotoperíodo 18L:6D (sombrite + EPS + LED). O resíduo de 67% é subdividido:
 
-| Sub-produto | % Peso Vivo | Kg/Despesca | Destinação |
+| Sub-produto | % Peso Vivo | Kg/Mês | Destinação |
 | :--- | :---: | :---: | :--- |
-| Filé limpo | 33% | 631 kg | Venda direta (B2B/B2C) + linguiça |
-| **Barriguinha** | **5%** | **96 kg** | **Linguiça — fator limitante** |
-| Recortes (aparas do filé) | 4% | 77 kg | Linguiça (48 kg) + graxaria (29 kg) |
-| Resíduo bruto (cabeças, espinha, vísceras, pele) | 58% | 1.109 kg | Graxaria |
-| **TOTAL** | **100%** | **1.913 kg** | |
+| Filé limpo | 33% | 726 kg | Venda direta (B2B/B2C) + linguiça |
+| **Barriguinha** | **5%** | **110 kg** | **Linguiça — fator limitante** |
+| Recortes (aparas do filé) | 4% | 88 kg | Linguiça (55 kg) + graxaria (33 kg) |
+| Resíduo bruto (cabeças, espinha, vísceras, pele) | 58% | 1.276 kg | Graxaria |
+| **TOTAL** | **100%** | **2.200 kg** | |
 
 ### 2.4 Formulação da Linguiça
 
@@ -64,13 +64,13 @@ A barriguinha (40% da fórmula) é o fator limitante — sua quantidade define o
 
 | Ingrediente | % | Kg/mês | Disponível |
 | :--- | :---: | :---: | :---: |
-| Filé | 40% | 96 kg | 631 kg ✓ |
-| Barriguinha | 40% | 96 kg | **96 kg — LIMITE** |
-| Recortes | 20% | 48 kg | 77 kg ✓ |
-| **Mix bruto** | **100%** | **240 kg** | |
-| Rendimento (90%) | | **216 kg linguiça/mês** | |
+| Filé | 40% | 110 kg | 726 kg ✓ |
+| Barriguinha | 40% | 110 kg | **110 kg — LIMITE** |
+| Recortes | 20% | 55 kg | 88 kg ✓ |
+| **Mix bruto** | **100%** | **275 kg** | |
+| Rendimento (90%) | | **248 kg linguiça/mês** | |
 
-*Para escalar a produção além de 216 kg/mês seria necessário aumentar o número de tanques ou adquirir barriguinha de terceiros.*
+*Para escalar a produção além de 248 kg/mês seria necessário aumentar o número de tanques ou adquirir barriguinha de terceiros.*
 
 ### 2.5 Receita da Linguiça
 
@@ -78,9 +78,9 @@ O mesmo mix 80/20 B2B/B2C se aplica ao produto linguiça:
 
 | Canal | % | Kg/mês | Preço (R$/kg) | Receita (R$/mês) |
 | :--- | :---: | :---: | :---: | :---: |
-| B2B — Restaurantes | 80% | 173 kg | R$ 30,00 | R$ 5.190 |
-| B2C — Feiras / Mercados | 20% | 43 kg | R$ 42,00 | R$ 1.806 |
-| **Total linguiça** | | **216 kg** | **~R$ 32,39/kg** | **R$ 6.996** |
+| B2B — Restaurantes | 80% | 198 kg | R$ 30,00 | R$ 5.940 |
+| B2C — Feiras / Mercados | 20% | 50 kg | R$ 42,00 | R$ 2.100 |
+| **Total linguiça** | | **248 kg** | **~R$ 32,42/kg** | **R$ 8.040** |
 
 ### 2.6 Logística de Distribuição — Cadeia de Frio
 
@@ -120,41 +120,89 @@ A linguiça começa na **primeira despesca (mês 7)**. Os equipamentos fazem par
 
 | Produto | Volume/mês | Preço Médio (R$/kg) | Faturamento (R$/mês) |
 | :--- | :---: | :---: | :---: |
-| Filé B2B — Restaurantes (80% de 535 kg*) | 428 kg | R$ 45,00 | R$ 19.260 |
-| Filé B2C — Feiras (20% de 535 kg*) | 107 kg | R$ 55,00 | R$ 5.885 |
-| Linguiça B2B — Restaurantes (80%) | 173 kg | R$ 30,00 | R$ 5.190 |
-| Linguiça B2C — Feiras (20%) | 43 kg | R$ 42,00 | R$ 1.806 |
-| Excedente farinha de peixe (graxaria, ~104 kg)** | 104 kg | R$ 4,00 | R$ 416 |
-| **TOTAL** | | | **R$ 32.557** |
+| Filé B2B — Restaurantes (80% de 616 kg*) | 493 kg | R$ 45,00 | R$ 22.185 |
+| Filé B2C — Feiras (20% de 616 kg*) | 123 kg | R$ 55,00 | R$ 6.765 |
+| Linguiça B2B — Restaurantes (80%) | 198 kg | R$ 30,00 | R$ 5.940 |
+| Linguiça B2C — Feiras (20%) | 50 kg | R$ 42,00 | R$ 2.100 |
+| Excedente farinha de peixe (graxaria, ~121 kg)** | 121 kg | R$ 4,00 | R$ 484 |
+| **TOTAL** | | | **R$ 37.474** |
 
-*535 kg filé = 631 kg total − 96 kg destinados à linguiça
-**Excedente da graxaria após suprir a demanda da ração própria (~146 kg necessários vs ~250 kg produzidos)
+*616 kg filé = 726 kg total − 110 kg destinados à linguiça
+**Excedente da graxaria após suprir a demanda da ração própria (~167 kg necessários vs ~288 kg produzidos)
 
 ### Comparativo de Faturamento
 
 | Cenário | Faturamento Mensal | Δ vs Base |
 | :--- | :---: | :---: |
-| Base original (100% B2B, só filé, R$ 45/kg) | R$ 28.395 | — |
-| Mix B2B/B2C (só filé, R$ 47/kg médio) | R$ 29.657 | +R$ 1.262 (+4,4%) |
-| **Mix completo (filé + linguiça + graxaria)** | **R$ 32.557** | **+R$ 4.162 (+14,7%)** |
+| Base original (100% B2B, só filé, R$ 45/kg, sem 18L:6D) | R$ 28.395 | — |
+| Mix B2B/B2C (só filé, R$ 47/kg médio, sem 18L:6D) | R$ 29.657 | +R$ 1.262 (+4,4%) |
+| Mix B2B/B2C (só filé, com 18L:6D +15%) | R$ 34.122 | +R$ 5.727 (+20,2%) |
+| **Mix completo (filé + linguiça + graxaria + 18L:6D)** | **R$ 37.474** | **+R$ 9.079 (+32,0%)** |
 
 ---
 
-## 4. OPEX Incremental (Linguiça + Graxaria)
+## 4. Ração para Terceiros — Receita Incremental (Pós Fase 4)
+
+### 4.1 Posicionamento
+Após a instalação da fábrica de ração (Fase 4), a extrusora opera apenas ~22 h/mês para cobrir a demanda própria. A capacidade remanescente (~700 h/mês) pode ser monetizada vendendo ração a piscicultores locais a um preço entre R$ 3,50–4,00/kg — **20–25% abaixo do mercado** (R$ 4,45/kg), criando uma proposta de valor competitiva com margem operacional sólida.
+
+### 4.2 Gargalo e Solução
+A graxaria produz 288 kg/mês de farinha de peixe, dos quais apenas 121 kg ficam excedentes após cobrir a ração própria. Para volum acima de 2.420 kg adicionais, a solução é uma **formulação Tier 2** que substitui farinha de peixe por farinha de carne/ossos comprada (5% da fórmula). O custo sobe ligeiramente para ~R$ 2,25/kg — margem de R$ 1,25/kg a R$ 3,50 de venda. Ver formulação detalhada no [Doc 04](04_Fabrica_de_Racao.md).
+
+### 4.3 Projeção Financeira (5.000 kg/mês)
+
+| Produto | Volume/mês | Preço | Receita |
+| :--- | :---: | :---: | :---: |
+| Ração Tier 2 (padrão) | 5.000 kg | R$ 3,50/kg | R$ 17.500 |
+| **Lucro líquido incremental** | | | **~R$ 5.100/mês** |
+
+*CAPEX zero — extrusora já instalada. Capital de giro extra: ~R$ 10.000.*
+
+---
+
+## 5. Couro de Tilápia — Oportunidade Exploratória Futura
+
+### 5.1 Potencial
+O processo de filetagem gera ~2.200–2.550 peles/mês. Após limpeza e salga, as peles podem ser vendidas a curtumes especializados ou artesãos:
+
+| Destino | Preço/pele | Receita potencial (2.000 peles úteis) |
+| :--- | :---: | :---: |
+| Curtume (pele salgada bruta) | R$ 3–5 | R$ 6.000–10.000/mês |
+| Curtume (pele salgada selecionada) | R$ 5–8 | R$ 10.000–16.000/mês |
+| Artesão local (pele semi-curtida) | R$ 10–15 | R$ 20.000–30.000/mês |
+
+### 5.2 Barreira de Entrada
+O couro de tilápia é um mercado de **nicho especializado**, não de commodity. Os desafios são:
+- **Escassez de curtumes capacitados:** Poucos curtumes no Brasil processam pele de peixe — requer mapeamento ativo de parceiros em MG e SP.
+- **Padronização:** O curtume exige peles de tamanho uniforme e sem furos. A filetagem mecânica pode danificar parte das peles.
+- **Sazonalidade de preços:** Mercado pequeno — excesso de oferta local pode colapsar o preço.
+- **Certificação de origem:** Para couro de exportação, rastreabilidade e certificados sanitários adicionais.
+
+### 5.3 Recomendação
+**Não incluir no CAPEX ou OPEX do projeto atual.** O couro representa oportunidade de alta geração de valor, mas com entrada de mercado incerta. Ação recomendada: após a operação atingir regime estável (mês 7+), contatar curtumes e ateliês de couro de peixe em BH/SP para avaliar absorção de volume. Se houver comprador firme, o investimento de entrada é mínimo:
+- Tanque de salga (pode ser caixa d'água 500–1.000 L): ~R$ 800
+- Sal grosso: ~R$ 200/mês
+- Sem equipamento adicional — o processo é manual
+
+---
+
+## 6. OPEX Incremental (Linguiça + Graxaria)
 
 | Item | Impacto Mensal (R$) |
 | :--- | :---: |
-| Temperos, tripa/casing, embalagem e insumos defumação | +R$ 1.500 |
-| Energia e insumos operacionais da graxaria | +R$ 350 |
-| Economia — farinha de peixe internalizada (146 kg × R$ 4,00) | −R$ 584 |
-| Economia — óleo de soja substituído por óleo de peixe (58 kg × R$ 6,00) | −R$ 348 |
-| **OPEX incremental líquido** | **+R$ 918** |
+| Temperos, tripa/casing, embalagem e insumos defumação | +R$ 1.650 |
+| Energia e insumos operacionais da graxaria | +R$ 400 |
+| Economia — farinha de peixe internalizada (167 kg × R$ 4,00) | −R$ 668 |
+| Economia — óleo de soja substituído por óleo de peixe (67 kg × R$ 6,00) | −R$ 402 |
+| **OPEX incremental líquido (linguiça + graxaria)** | **+R$ 980** |
 
-### Novo Lucro Mensal (Operação Completa + Linguiça + Graxaria)
+*Volumes maiores vs cenário sem 18L:6D devido ao +15% de biomassa.*
+
+### Novo Lucro Mensal (Operação Completa + Linguiça + Graxaria + 18L:6D)
 
 | Métrica | Valor |
 | :--- | :---: |
-| Lucro base (Fases 1–5, ração própria + solar 26 kWp) | R$ 16.266 |
-| + Receita incremental (linguiça + mix B2C + farinha) | +R$ 4.162 |
-| − OPEX incremental | −R$ 918 |
-| **Novo Lucro Operacional Mensal** | **~R$ 19.510** |
+| Lucro base (Fases 1–5, ração própria + solar 26 kWp + 18L:6D) | R$ 18.640 |
+| + Receita incremental (linguiça + mix B2C + farinha) | +R$ 5.205 |
+| − OPEX incremental (linguiça + graxaria) | −R$ 980 |
+| **Novo Lucro Operacional Mensal** | **~R$ 22.865** |

@@ -12,20 +12,21 @@ Os peixes **permanecem no mesmo tanque** durante todo o ciclo de 6 meses. Não h
 4. Mês 7: T1 atinge peso de despesca (~850g). Peixes são transferidos ao **tanque de depuração** (purga 3-5 dias). T1 é limpo e repovoado com alevinos.
 5. Mês 8: T2 é despescado. E assim por diante — **uma despesca por mês**.
 
-## Dimensionamento de Biomassa (Regime Estável)
-Após os primeiros 6 meses, cada tanque estará em um estágio diferente do ciclo:
+## Dimensionamento de Biomassa (Regime Estável — com Fotoperíodo 18L:6D)
+Após os primeiros 6 meses, cada tanque estará em um estágio diferente do ciclo. Os pesos refletem o ganho de **+15% de biomassa** pelo sistema de fotoperíodo 18L:6D (sombrite + EPS + LED, Fase 3):
 
 | Tanque | Mês do Ciclo | Peso Médio (g) | Nº Peixes | Biomassa (kg) |
 | :---: | :---: | :---: | :---: | :---: |
-| Ciclo 1 | 1 | 10-50 | 2.900 | 87 |
-| Ciclo 2 | 2 | 50-150 | 2.750 | 275 |
-| Ciclo 3 | 3 | 150-300 | 2.650 | 596 |
-| Ciclo 4 | 4 | 300-500 | 2.600 | 1.040 |
-| Ciclo 5 | 5 | 500-700 | 2.570 | 1.542 |
-| Ciclo 6 | 6 | 700-850 | 2.550 | 1.913 |
-| **TOTAL** | | | | **5.453 kg** |
+| Ciclo 1 | 1 | 12–58 | 2.900 | 100 |
+| Ciclo 2 | 2 | 58–173 | 2.750 | 316 |
+| Ciclo 3 | 3 | 173–345 | 2.650 | 685 |
+| Ciclo 4 | 4 | 345–575 | 2.600 | 1.196 |
+| Ciclo 5 | 5 | 575–805 | 2.570 | 1.773 |
+| Ciclo 6 | 6 | 805–978 | 2.550 | **2.200** |
+| **TOTAL** | | | | **6.270 kg** |
 
 *Mortalidade acumulada considerada: ~10% alevinagem, ~3% recria, ~1-2% engorda.*
+*Densidade final Ciclo 6: 36,7 kg/m³ — dentro do limite seguro para tilápia intensiva (40–50 kg/m³ máx).*
 
 ## Aeração (O Pulmão)
 - **Sopradores de Canal Lateral:** 2 unidades de 2.0 CV, operando em rede mestra de PVC (75-100mm) com distribuição em anel (Ring Main).

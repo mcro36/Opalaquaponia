@@ -7,11 +7,13 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export interface DRE {
   receita_bruta: number;
+  receita_agregados?: number;
   pis_cofins: number;
   receita_liquida: number;
   cpv_racao: number;
   cpv_alevinos: number;
   cpv_processamento: number;
+  cpv_agregados?: number;
   lucro_bruto: number;
   sga_energia: number;
   sga_manutencao: number;
